@@ -1,4 +1,75 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/basic.css"> <link rel=icon  href="/assets/favicon.png"> <title>Notas</title> <header> <div class=blog-name ><a href="">Julia com Física</a></div> <nav> <ul> <li><a href="/">Apresentação</a> <li><a href="/menu1/">Atualizações</a> <li><a href="/menu2/">Notas</a> <li><a href="/menu3/">Errata</a> </ul> <img src="/assets/hamburger.svg" id=menu-icon > </nav> </header> <div class=franklin-content ><h1 id=problemas_com_o_kernel_do_julia_no_jupyter_notebook ><a href="#problemas_com_o_kernel_do_julia_no_jupyter_notebook">Problemas com o Kernel do Julia no Jupyter Notebook</a></h1> <p>Para resolver problemas com o kernel do Julia no Jupyter instalado em seu computador, você digitar os comandos abaixo no REPL do Julia.</p> <pre><code class="julia-repl hljs">julia &gt; using Pkg
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/basic.css"> <link rel=icon  href="/assets/favicon.png"> <title>Notas</title> <header> <div class=blog-name ><a href="">Julia com Física</a></div> <nav> <ul> <li><a href="/">Apresentação</a> <li><a href="/menu1/">Novo</a> <li><a href="/menu2/">Notas</a> <li><a href="/menu3/">Errata</a> </ul> <img src="/assets/hamburger.svg" id=menu-icon > </nav> </header> <div class=franklin-content ><h1 id=notas ><a href="#notas">Notas</a></h1> <div class=franklin-toc ><ol><li><a href="#tabela_periódica">Tabela Periódica </a><ol><li><a href="#rádio">Rádio </a><li><a href="#polônio">Polônio</a><li><a href="#desenvolvedores_do_periodictablejl">Desenvolvedores do <code>PeriodicTable.jl</code></a><li><a href="#referência">Referência</a></ol><li><a href="#problemas_com_o_kernel_do_julia_no_jupyter_notebook">Problemas com o Kernel do Julia no Jupyter Notebook</a></ol></div> <h2 id="tabela_periódica"><a href="#tabela_periódica">Tabela Periódica </a></h2> <p>Em 2019 a tabela periódica completou 150 anos. Sua primeira versão, concebida, em 1789, por Antoine Lavoisier possuía 33 elementos químicos. Hoje, ela conta com 119 elementos, organizados sistematicamente de acordo com seus números atômicos, camadas eletrônicas, número de elétrons na camada de valência e propriedades físicas.<br/> Vários cientista contribuíram para o desenvolvimento dela, dentre eles se destaca a Física Marie Curie. Ela foi a primeira mulher a ganhar o prêmio Nobel e a primeira pessoa e única mulher a ganhá-lo por duas vezes. Um em Física ao demonstrar a existência da radioatividade natural em 1903 e outro em 1911, em Química, pela descoberta de dois novos elementos: o rádio e o polônio.</p> <p>Em Julia há um pacote que nos permite acessar os elementos da tabela periódica, chama-se <code>PeriodicTable.jl</code>. Primeiramente precisamos instalá-lo. Para isso, basta digitar no REPL do Julia o código a seguir e pressionar Enter.</p> <pre><code class="julia-repl hljs">] add PeriodicTable</code></pre>
+<p>Caso você esteja usando o Jupyter, o procedimento é o mesmo que descrevemos na seção 3.1 do livro <code>Julia com Física: Uma Introdução</code>, quando falamos de instalação de pacotes. Digite:<br/></p>
+<pre><code class="julia hljs"><span class=hljs-keyword >using</span> Pkg
+Pkg.add(<span class=hljs-string >&quot;PeriodicTable&quot;</span>)</code></pre>
+<p>Os procedimentos que descreveremos a partir de agora é o mesmo para ambos os ambientes.<br/></p>
+<p>Para obter acesso ao banco de dados do <code>PeriodicTable.jl</code>contendo os elementos da tabela periódica, digitamos o seguinte trecho de código:</p>
+<pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=julia > <span class=hljs-keyword >using</span> PeriodicTable
+</span>
+<span class=hljs-meta >julia&gt;</span><span class=julia > elements
+</span>Elements(…119 elements…):
+H                                                  He
+Li Be                               B  C  N  O  F  Ne
+Na Mg                               Al Si P  S  Cl Ar
+K  Ca Sc Ti V  Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr
+Rb Sr Y  Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I  Xe
+Cs Ba    Hf Ta W  Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn
+Fr Ra    Rf Db Sg Bh Hs Mt Ds Rg Cn Nh Fl Mc Lv Ts Og
+Uue                                                   
+      La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu    
+      Ac Th Pa U  Np Pu Am Cm Bk Cf Es Fm Md No Lr</code></pre>
+<p>É possível procurar pelos elementos através de três formas. Como exemplo usaremos os elementos descobertos por Marie Skłodowska Curie: O rádio e o Polônio. </p>
+<h3 id="rádio"><a href="#rádio">Rádio </a></h3>
+<p>A busca pelo elemento rádio pode se dar por: <code>elements&#91;&quot;radium&quot;&#93;</code>, <code>elements&#91;:Ra&#93;</code> ou por n <code>elements&#91;88&#93;</code>, veja o código abaixo.</p>
+<pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=julia > elements[<span class=hljs-string >&quot;radium&quot;</span>]
+</span>Radium (Ra), number 88:
+        category: alkaline earth metal
+     atomic mass: 226.0 u
+         density: 5.5 g/cm³
+   melting point: 1233.0 K
+   boiling point: 2010.0 K
+           phase: Solid
+          shells: [2, 8, 18, 32, 18, 8, 2]
+e⁻-configuration: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s²
+      appearance: silvery white metallic
+         summary: Radium is a chemical element with symbol Ra and atomic number 88. It is the sixth element in group 2 of the periodic table, also known as the alkaline earth metals. Pure radium is almost colorless, but it readily combines with nitrogen (rather than oxygen) on exposure to air, forming a black surface layer of radium nitride (Ra3N2).
+   discovered by: Pierre Curie
+          source: https://en.wikipedia.org/wiki/Radium</code></pre>
+<h3 id="polônio"><a href="#polônio">Polônio</a></h3>
+<p>A busca pelo elemento polônio se dá da mesma maneira que fizemos anteriormente: <code>elements&#91;&quot;polonium&quot;&#93;</code>, <code>elements&#91;:Po&#93;</code> ou <code>elements&#91;84&#93;</code>.</p>
+<pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=julia > elements[<span class=hljs-string >&quot;polonium&quot;</span>]
+</span>Polonium (Po), number 84:
+        category: post-transition metal
+     atomic mass: 209.0 u
+         density: 9.196 g/cm³
+      molar heat: 26.4 J/mol⋅K
+   melting point: 527.0 K
+   boiling point: 1235.0 K
+           phase: Solid
+          shells: [2, 8, 18, 32, 18, 6]
+e⁻-configuration: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁴
+      appearance: silvery
+         summary: Polonium is a chemical element with symbol Po and atomic number 84, discovered in 1898 by Marie Curie and Pierre Curie. A rare and highly radioactive element with no stable isotopes, polonium is chemically similar to bismuth and tellurium, and it occurs in uranium ores. Applications of polonium are few.
+   discovered by: Pierre Curie
+          source: https://en.wikipedia.org/wiki/Polonium</code></pre>
+<p>Para cada elemento é listado: Categoria, massa atômica, densidade, ponto de fusão e ebulição, por quem foi descoberto, dentre outras características. Segundo seus desenvolvedores algumas informações foram &#40;e serão&#41; adicionadas ao longo do tempo.</p>
+<h3 id=desenvolvedores_do_periodictablejl ><a href="#desenvolvedores_do_periodictablejl">Desenvolvedores do <code>PeriodicTable.jl</code></a></h3>
+<p><a href="https://github.com/stevengj">Steven G. Johnson</a><br/> <a href="https://github.com/lancebeet">Jacob Wikmark</a><br/> <a href="https://github.com/crstnbr">Carsten Bauer</a><br/></p>
+<h3 id="referência"><a href="#referência">Referência</a></h3>
+<p>&#91;1&#93; <a href="https://revistagalileu.globo.com/Ciencia/noticia/2019/03/conheca-mulheres-esquecidas-por-tras-da-tabela-periodica.html">Conheça as mulheres &#40;esquecidas&#41; por trás da tabela periódica</a></p>
+<p>&#91;2&#93; <a href="https://super.abril.com.br/blog/superlistas/8-elementos-quimicos-incriveis-da-tabela-periodica/">8 Elementos químicos invisíveis da tabela periódica</a></p>
+<p>&#91;3&#93; <a href="https://mundoeducacao.uol.com.br/quimica/marie-curie.htm#:~:text&#61;Em&#37;201898&#37;2C&#37;20Marie&#37;20anunciou&#37;20&#37;C3&#37;A0,Nobel&#37;20em&#37;20&#37;C3&#37;A1reas&#37;20cient&#37;C3&#37;ADficas&#37;20diferentes. ">Mundo Educação - Marie Curie</a></p>
+<p>&#91;4&#93; <a href="https://github.com/JuliaPhysics/PeriodicTable.jl">JuliaPhysics - PeriodicTable.jl</a></p>
+<h2 id=problemas_com_o_kernel_do_julia_no_jupyter_notebook ><a href="#problemas_com_o_kernel_do_julia_no_jupyter_notebook">Problemas com o Kernel do Julia no Jupyter Notebook</a></h2>
+<p>Para resolver problemas com o kernel do Julia no Jupyter instalado em seu computador, você digitar os comandos abaixo no REPL do Julia.</p>
+<pre><code class="julia-repl hljs">julia &gt; using Pkg
 julia &gt; Pkg.update()
 julia &gt; Pkg.build(&quot;IJulia&quot;)
-julia &gt; using IJulia; notebook()</code></pre> <p>Após digitar esses códigos, você deve voltar ao Jupyter e o kernel do Julia deverá estar funcionando normalmente.</p> <div class=page-foot > <div class=copyright > &copy; Meneses&Araújo. Last modified: November 21, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div>
+julia &gt; using IJulia; notebook()</code></pre>
+<p>Após digitar esses códigos, você deve voltar ao Jupyter e o kernel do Julia deverá estar funcionando normalmente.</p>
+<div class=page-foot >
+  <div class=copyright >
+    &copy; Meneses&Araújo. Last modified: November 27, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div>
