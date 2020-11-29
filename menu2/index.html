@@ -1,4 +1,133 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/basic.css"> <link rel=icon  href="/assets/favicon.png"> <title>Notas</title> <header> <div class=blog-name ><a href="">Julia com Física</a></div> <nav> <ul> <li><a href="/">Apresentação</a> <li><a href="/menu1/">Novo</a> <li><a href="/menu2/">Notas</a> <li><a href="/menu3/">Errata</a> </ul> <img src="/assets/hamburger.svg" id=menu-icon > </nav> </header> <div class=franklin-content ><h1 id=notas ><a href="#notas">Notas</a></h1> <div class=franklin-toc ><ol><li><a href="#tabela_periódica">Tabela Periódica </a><ol><li><a href="#rádio">Rádio </a><li><a href="#polônio">Polônio</a><li><a href="#desenvolvedores_do_periodictablejl">Desenvolvedores do <code>PeriodicTable.jl</code></a><li><a href="#referência">Referência</a></ol><li><a href="#problemas_com_o_kernel_do_julia_no_jupyter_notebook">Problemas com o Kernel do Julia no Jupyter Notebook</a></ol></div> <h2 id="tabela_periódica"><a href="#tabela_periódica">Tabela Periódica </a></h2> <p>Em 2019 a tabela periódica completou 150 anos. Sua primeira versão, concebida, em 1789, por Antoine Lavoisier possuía 33 elementos químicos. Hoje, ela conta com 119 elementos, organizados sistematicamente de acordo com seus números atômicos, camadas eletrônicas, número de elétrons na camada de valência e propriedades físicas.<br/> Vários cientista contribuíram para o desenvolvimento dela, dentre eles se destaca a Física Marie Curie. Ela foi a primeira mulher a ganhar o prêmio Nobel e a primeira pessoa e única mulher a ganhá-lo por duas vezes. Um em Física ao demonstrar a existência da radioatividade natural em 1903 e outro em 1911, em Química, pela descoberta de dois novos elementos: o rádio e o polônio.</p> <p>Em Julia há um pacote que nos permite acessar os elementos da tabela periódica, chama-se <code>PeriodicTable.jl</code>. Primeiramente precisamos instalá-lo. Para isso, basta digitar no REPL do Julia o código a seguir e pressionar Enter.</p> <pre><code class="julia-repl hljs">] add PeriodicTable</code></pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/katex/katex.min.css"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/basic.css"> <link rel=icon  href="/assets/favicon.png"> <title>Notas</title> <header> <div class=blog-name ><a href="">Julia com Física</a></div> <nav> <ul> <li><a href="/">Apresentação</a> <li><a href="/menu1/">Notas</a> <li><a href="/menu2/">Blog</a> <li><a href="/menu3/">Errata</a> </ul> <img src="/assets/hamburger.svg" id=menu-icon > </nav> </header> <div class=franklin-content ><h1 id=blog ><a href="#blog">Blog</a></h1> <div class=franklin-toc ><ol><li><a href="#animações_em_julia_com_o_javisjl">Animações em Julia com o <code>Javis.jl</code></a><li><a href="#tabela_periódica">Tabela Periódica </a></ol></div> <h2 id="animações_em_julia_com_o_javisjl"><a href="#animações_em_julia_com_o_javisjl">Animações em Julia com o <code>Javis.jl</code></a></h2> <p>Seguindo este tutorial passo a passo você obterá, ao final, a seguinte animação:</p> <div class=row ><div class=left ><img src="/assets/orbita3.gif" alt="" /></div> <div style="clear: both"></div></div> <p>Abaixo, apresentamos o código para a animação acima. Mas, antes de dar um <strong>Ctrl&#43;C</strong>, <strong>CtrL&#43;V</strong> para um ambiente Julia, como o Jupyter por exemplo, vamos entender os principais pontos do código?</p> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Javis
+
+<span class=hljs-keyword >function</span> ground(args...)
+    background(<span class=hljs-string >&quot;black&quot;</span>) 
+    sethue(<span class=hljs-string >&quot;black&quot;</span>) 
+<span class=hljs-keyword >end</span>
+
+<span class=hljs-keyword >function</span> object(p=O, color=<span class=hljs-string >&quot;black&quot;</span>)
+    sethue(color)
+    circle(p, <span class=hljs-number >25</span>, :fill)
+    <span class=hljs-keyword >return</span> p
+<span class=hljs-keyword >end</span>
+
+<span class=hljs-keyword >function</span> path!(points, pos, color)
+    sethue(color)
+    push!(points, pos) 
+    circle.(points, <span class=hljs-number >2</span>, :fill)
+<span class=hljs-keyword >end</span>
+
+myvideo = Video(<span class=hljs-number >700</span>, <span class=hljs-number >700</span>)
+
+path_of_blue = Point[]
+path_of_gray = Point[]
+
+Background(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, ground)
+yellow_ball = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;yellow&quot;</span>), Point(<span class=hljs-number >0</span>,<span class=hljs-number >0</span>))
+blue_ball = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;blue&quot;</span>), Point(<span class=hljs-number >200</span>,<span class=hljs-number >0</span>))
+act!(blue_ball, Action(anim_rotate_around(<span class=hljs-number >2</span><span class=hljs-literal >π</span>, O)))
+gray_ball = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;gray&quot;</span>), Point(<span class=hljs-number >150</span>,<span class=hljs-number >30</span>))
+act!(gray_ball, Action(anim_rotate_around(<span class=hljs-number >24</span><span class=hljs-literal >π</span>, blue_ball)))
+Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(path_of_blue, pos(blue_ball), <span class=hljs-string >&quot;blue&quot;</span>))
+Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(path_of_gray, pos(gray_ball), <span class=hljs-string >&quot;gray&quot;</span>))
+
+render(myvideo; pathname=<span class=hljs-string >&quot;orbitas.gif&quot;</span>)</code></pre> <p>Então, bora lá&#33;</p> <p>O primeiro passo é fazer a instalação do pacote<sup id="fnref:1"><a href="#fndef:1" class=fnref >[1]</a></sup> <code>Javis.jl</code>. Se você estiver usando o Jupyter insira os comandos:</p> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Pkg
+Pkg.add(<span class=hljs-string >&quot;Javis&quot;</span>)</code></pre> <blockquote> <p><strong>Nota 1:</strong> Este passo não consta no código acima. Ele será necessário apenas na primeira vez que você for usar o pacote em seu computador.</p> </blockquote> <p>Após a instalação precisamos carregar o pacote para o nosso código. Para isso, digite o comando abaixo:</p> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Javis</code></pre>
+<p>Pronto&#33; Com o pacote instalado e devidamente carregado, podemos iniciar a construção da nossa animação.</p>
+<p>Nossa primeira tarefa na construção da animação é definir a função<sup id="fnref:2"><a href="#fndef:2" class=fnref >[2]</a></sup> <code>ground</code>. Ela definirá o fundo da animação &#40;<em>background</em>&#41; e a cor da &quot;caneta&quot; &#40;<em>pen</em>&#41; como preto. Observe o código abaixo:</p>
+<pre><code class="julia hljs"><span class=hljs-keyword >function</span> ground(args...)
+    background(<span class=hljs-string >&quot;black&quot;</span>) <span class=hljs-comment ># cor de fundo da tela.</span>
+    sethue(<span class=hljs-string >&quot;black&quot;</span>) <span class=hljs-comment ># cor da caneta</span>
+<span class=hljs-keyword >end</span></code></pre>
+<p>Você pode estar se perguntado porque <code>args...</code>  na primeira linha. Vamos te explicar. Cada função definida pelo usuário recebe três argumentos: <code>video</code> &#40;estrutura do vídeo&#41;, <code>object</code> &#40;estrutura do objeto&#41; e <code>frame</code> &#40;o número de quadros atuais&#41; fornecidos pelo <code>Javis.jl</code>.<br/></p>
+<p>Embora esses argumentos sejam irrelevantes para a função <code>ground</code>, precisamos escrever <code>args...</code>para que Julia saiba que temos uma função que aceita esses três argumentos. Quanto ao <code>...</code> significa basicamente quantos argumentos você quiser.<br/></p>
+<p>A seguir criamos a função <code>object</code>, ela define uma cor para os círculos e os desenha adequadamente. Veja o código abaixo:</p>
+<pre><code class="julia hljs"><span class=hljs-keyword >function</span> object(p=O, color=<span class=hljs-string >&quot;black&quot;</span>)
+    sethue(color)
+    circle(p, <span class=hljs-number >25</span>, :fill)
+    <span class=hljs-keyword >return</span> p
+<span class=hljs-keyword >end</span></code></pre>
+<p>Na função acima <code>25</code> é o raio da bola, tente modificá-lo para ver o que acontece e <code>:fill</code> preenche a bola com a cor que definirmos.<br/></p>
+<p>A última função que criaremos em nosso código é a função <code>path&#33;</code>. Ela desenha a trajetória das bolas. Veja o código abaixo:</p>
+<pre><code class="julia hljs"><span class=hljs-keyword >function</span> path!(points, pos, color)
+    sethue(color)
+    push!(points, pos) <span class=hljs-comment ># adiciona pos aos pontos</span>
+    circle.(points, <span class=hljs-number >2</span>, :fill) <span class=hljs-comment ># desenha círculos para cada ponto usando broadcasting</span>
+<span class=hljs-keyword >end</span></code></pre>
+<blockquote>
+<p><strong>Nota 2:</strong> O <code>pos</code> assume a <strong>pos</strong>ição de uma determinada bola e passa-o como argumento para a função <code>path&#33;</code>.</p>
+</blockquote>
+<blockquote>
+<p><strong>Nota 3:</strong> O conceito de broadcasting está descrito em detalhes no capítulo 7 do livro <code>Julia com Física: Uma Introdução</code>.</p>
+</blockquote>
+<p>A seguir criamos a variável <code>myvideo</code> e atribuímos a ela um <code>video</code>, ele define a tela de vídeo para a animação. Aqui nossa tea possui 700 pixels de largura por 700 pixels de altura. </p>
+<pre><code class="julia hljs">myvideo = Video(<span class=hljs-number >700</span>, <span class=hljs-number >700</span>) <span class=hljs-comment ># 700 x 700 (largura x altura)</span></code></pre>
+<p>Cada objeto ou ação que criamos durante o código é adicionado ao <code>myvideo</code>.</p>
+<p>A seguir criamos duas variáveis <code>path_of_blue</code> e <code>path_of_gray</code> que armazenarão em um vetor <sup id="fnref:3"><a href="#fndef:3" class=fnref >[3]</a></sup> os pontos da trajetória das bolas azul e cinza. </p>
+<pre><code class="julia hljs">path_of_blue = Point[]
+path_of_gray = Point[]</code></pre>
+<p>Logo após,  usamos <code>Background</code> para especificar que a função <code>ground</code> será aplicada a todos os objetos descritos posteriormente.</p>
+<pre><code class="julia hljs">Background(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, ground)</code></pre>
+<p>o valor <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>:</mo><mn>500</mn></mrow><annotation encoding="application/x-tex">1:500</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >1</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >:</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >5</span><span class=mord >0</span><span class=mord >0</span></span></span></span>, se refere a cada quadro da animação de 1 a 500 e está relacionado também a veocidade da animação. Varie o valor 500 para mais e para menos para ver o que acontece. <em>Vamos dar spoiler: Quando diminuímos a taxa para, por exemplo, 1:200 a animação fica mais rápida</em>. </p>
+<p>Abaixo descrevemos o código para a <code>yellow_ball</code>. Ela representa o Sol e estará localizada no centro da animação e não possuirá movimento.</p>
+<pre><code class="julia hljs">yellow_ball = Object((args...)-&gt;object(O, <span class=hljs-string >&quot;yellow&quot;</span>), Point(<span class=hljs-number >0</span>,<span class=hljs-number >0</span>))</code></pre>
+<p>Posteriormente definimos o objeto <code>blue_ball</code>, que representará o planeta Terra em nossa animação.</p>
+<pre><code class="julia hljs">blue_ball = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;blue&quot;</span>), Point(<span class=hljs-number >200</span>,<span class=hljs-number >0</span>))
+act!(blue_ball, Action(anim_rotate_around(<span class=hljs-number >2</span><span class=hljs-literal >π</span>, O)))</code></pre>
+<p>Perceba que a cor e a posição da bola <code>blue_ball</code> são definidos na função anônima <sup id="fnref:4"><a href="#fndef:4" class=fnref >[4]</a></sup> <code>&#40;args...&#41;-&gt;object&#40;O, &quot;blue&quot;&#41;, Point&#40;200,0&#41;&#41;</code>. Onde <code>Point&#40;200,0&#41;</code> significa que <code>blue_ball</code> estará localizada à 200 pixels da origem na direção x.<br/></p>
+<p>Logo abaixo de <code>blue_ball</code> aparece pela primeira vez o método <code>act&#33;</code>. </p>
+<p>O trecho de código<code>act&#33;&#40;blue_ball, Action&#40;anim_rotate_around&#40;2π, O&#41;&#41;&#41;</code> fará com que <code>blue_ball</code>gire em um ângulo de <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">2π</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >2</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span> em torno do centro da animação.</p>
+<p>Abaixo definimos o <code>gray_ball</code>, ela representará a Lua em nossa simulação.</p>
+<pre><code class="julia hljs">gray_ball = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;gray&quot;</span>), Point(<span class=hljs-number >150</span>,<span class=hljs-number >30</span>))
+act!(gray_ball, Action(anim_rotate_around(<span class=hljs-number >24</span><span class=hljs-literal >π</span>, blue_ball)))</code></pre>
+<p>Perceba que assim como ocorreu com <code>blue_ball</code> a cor e a posição de <code>gray_ball</code> também são definidos na função anônima <code>&#40;args...&#41;-&gt;object&#40;O, &quot;gray&quot;&#41;, Point&#40;150,30&#41;&#41;</code>. Onde <code>Point&#40;150,30&#41;</code> significa que <code>gray_ball</code> estará localizada à 150 pixels da origem na direção x e 30 pixels da origem na direção y.<br/></p>
+<p>O trecho de código <code>act&#33;&#40;gray_ball, Action&#40;anim_rotate_around&#40;24π, blue_ball&#41;&#41;&#41;</code> diz que <code>gray_ball</code> irá girar em um ângulo de <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>24</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">24π</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >2</span><span class=mord >4</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span> em torno de <code>blue_ball</code>. Isso fará com que nossa Lua descreva uma espécie de espiral para contornar a Terra. Tente modificar esse valor para ver o que acontece.</p>
+<p>A seguir vemos que os objetos <code>path_of_blue</code>e <code>path_of_gray</code>&#40;caminho de <code>blue_ball</code> e caminho de<code>gray_ball</code>&#41; são definidos nas funções anônimas <code>&#40;args...&#41;-&gt;path&#33;&#40;path_of_blue, pos&#40;blue_ball&#41;, &quot;blue&quot;&#41;</code> e <code>&#40;args...&#41;-&gt;path&#33;&#40;path_of_gray, pos&#40;gray_ball&#41;, &quot;gray&quot;&#41;</code> respectivamente. Isso desenhará a trajetória de <code>blue_ball</code> e de <code>gray_ball</code>.</p>
+<pre><code class="julia hljs">Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(path_of_blue, pos(blue_ball), <span class=hljs-string >&quot;blue&quot;</span>))
+Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(path_of_gray, pos(gray_ball), <span class=hljs-string >&quot;gray&quot;</span>))</code></pre>
+<p>Faça um teste. Apague ou comente &#40;basta colocar # antes do código&#41; a função <code>path&#33;</code> e estas duas inhas acima para ver o que acontece. <em>Spoiler: Não haverá mais o desenho da trajetória em nossa simulação.</em> Va em frente e teste&#33;</p>
+<p>Finalmnte, o comando <code>render</code>, renderiza todos os objetos definidos no <code>video</code> que definimos como <code>myvideo</code> e o produz como um arquivo <code>gif</code>.</p>
+<pre><code class="julia hljs">render(myvideo; pathname=<span class=hljs-string >&quot;orbitas.gif&quot;</span>)</code></pre>
+<p>Agora sim, copie e cole o código em um ambiente Julia e o modifique quantas vezes quiser e aprecie o resultados.</p>
+<p><table class=fndef  id="fndef:1">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:1">[1]</a>
+        <td class=fndef-content >O processo de instalação de pacotes é descrito com detalhes no capítluo 3 do livro <code>Julia com Física: Uma Introdução</code>.
+    
+</table>
+<table class=fndef  id="fndef:2">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:2">[2]</a>
+        <td class=fndef-content >O conceito de função e sua sintaxe são descritos no capítulo 6  do livro <code>Julia com Física: Uma Introdução</code>.
+    
+</table>
+<table class=fndef  id="fndef:3">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:3">[3]</a>
+        <td class=fndef-content >O conceito de arrays &#40;vetores e matrizes&#41; é explicado em detalhe no capítulo 4 do livro <code>Julia com Física: Uma Introdução</code>.
+    
+</table>
+<table class=fndef  id="fndef:4">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:4">[4]</a>
+        <td class=fndef-content >O conceito de função anônima é explicado no capítulo 6  do livro <code>Julia com Física: Uma Introdução</code>. 
+    
+</table>
+</p>
+<ul>
+<li><p><strong>O pacote foi desenvolvido por:</strong></p>
+
+</ul>
+<p><a href="https://github.com/Wikunia">Ole Kröger</a><br/> <a href="https://gist.github.com/TheCedarPrince">Jacob Zelko</a></p>
+<ul>
+<li><p><strong>Referência</strong></p>
+
+</ul>
+<p>&#91;1&#93; <a href="https://wikunia.github.io/Javis.jl/stable/">Javis.Jl</a></p>
+<h2 id="tabela_periódica"><a href="#tabela_periódica">Tabela Periódica </a></h2>
+<p>Em 2019 a tabela periódica completou 150 anos. Sua primeira versão, concebida, em 1789, por Antoine Lavoisier possuía 33 elementos químicos. Hoje, ela conta com 119 elementos, organizados sistematicamente de acordo com seus números atômicos, camadas eletrônicas, número de elétrons na camada de valência e propriedades físicas.<br/> Vários cientista contribuíram para o desenvolvimento dela, dentre eles se destaca a Física Marie Curie. Ela foi a primeira mulher a ganhar o prêmio Nobel e a primeira pessoa e única mulher a ganhá-lo por duas vezes. Um em Física ao demonstrar a existência da radioatividade natural em 1903 e outro em 1911, em Química, pela descoberta de dois novos elementos: o rádio e o polônio.</p>
+<p>Em Julia há um pacote que nos permite acessar os elementos da tabela periódica, chama-se <code>PeriodicTable.jl</code>. Primeiramente precisamos instalá-lo. Para isso, basta digitar no REPL do Julia o código a seguir e pressionar Enter.</p>
+<pre><code class="julia-repl hljs">] add PeriodicTable</code></pre>
 <p>Caso você esteja usando o Jupyter, o procedimento é o mesmo que descrevemos na seção 3.1 do livro <code>Julia com Física: Uma Introdução</code>, quando falamos de instalação de pacotes. Digite:<br/></p>
 <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Pkg
 Pkg.add(<span class=hljs-string >&quot;PeriodicTable&quot;</span>)</code></pre>
@@ -19,8 +148,11 @@ Uue
       La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu    
       Ac Th Pa U  Np Pu Am Cm Bk Cf Es Fm Md No Lr</code></pre>
 <p>É possível procurar pelos elementos através de três formas. Como exemplo usaremos os elementos descobertos por Marie Skłodowska Curie: O rádio e o Polônio. </p>
-<h3 id="rádio"><a href="#rádio">Rádio </a></h3>
-<p>A busca pelo elemento rádio pode se dar por: <code>elements&#91;&quot;radium&quot;&#93;</code>, <code>elements&#91;:Ra&#93;</code> ou por n <code>elements&#91;88&#93;</code>, veja o código abaixo.</p>
+<ul>
+<li><p>Rádio </p>
+
+</ul>
+<p>A busca pelo elemento rádio pode se dar por: <code>elements&#91;&quot;radium&quot;&#93;</code>, <code>elements&#91;:Ra&#93;</code> ou por <code>elements&#91;88&#93;</code>, veja o código abaixo.</p>
 <pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=julia > elements[<span class=hljs-string >&quot;radium&quot;</span>]
 </span>Radium (Ra), number 88:
         category: alkaline earth metal
@@ -35,7 +167,10 @@ e⁻-configuration: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5
          summary: Radium is a chemical element with symbol Ra and atomic number 88. It is the sixth element in group 2 of the periodic table, also known as the alkaline earth metals. Pure radium is almost colorless, but it readily combines with nitrogen (rather than oxygen) on exposure to air, forming a black surface layer of radium nitride (Ra3N2).
    discovered by: Pierre Curie
           source: https://en.wikipedia.org/wiki/Radium</code></pre>
-<h3 id="polônio"><a href="#polônio">Polônio</a></h3>
+<ul>
+<li><p>Polônio</p>
+
+</ul>
 <p>A busca pelo elemento polônio se dá da mesma maneira que fizemos anteriormente: <code>elements&#91;&quot;polonium&quot;&#93;</code>, <code>elements&#91;:Po&#93;</code> ou <code>elements&#91;84&#93;</code>.</p>
 <pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=julia > elements[<span class=hljs-string >&quot;polonium&quot;</span>]
 </span>Polonium (Po), number 84:
@@ -53,23 +188,22 @@ e⁻-configuration: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5
    discovered by: Pierre Curie
           source: https://en.wikipedia.org/wiki/Polonium</code></pre>
 <p>Para cada elemento é listado: Categoria, massa atômica, densidade, ponto de fusão e ebulição, por quem foi descoberto, dentre outras características. Segundo seus desenvolvedores algumas informações foram &#40;e serão&#41; adicionadas ao longo do tempo.</p>
-<h3 id=desenvolvedores_do_periodictablejl ><a href="#desenvolvedores_do_periodictablejl">Desenvolvedores do <code>PeriodicTable.jl</code></a></h3>
+<ul>
+<li><p>Desenvolvedores do <code>PeriodicTable.jl</code></p>
+
+</ul>
 <p><a href="https://github.com/stevengj">Steven G. Johnson</a><br/> <a href="https://github.com/lancebeet">Jacob Wikmark</a><br/> <a href="https://github.com/crstnbr">Carsten Bauer</a><br/></p>
-<h3 id="referência"><a href="#referência">Referência</a></h3>
+<ul>
+<li><p>Referência</p>
+
+</ul>
 <p>&#91;1&#93; <a href="https://revistagalileu.globo.com/Ciencia/noticia/2019/03/conheca-mulheres-esquecidas-por-tras-da-tabela-periodica.html">Conheça as mulheres &#40;esquecidas&#41; por trás da tabela periódica</a></p>
 <p>&#91;2&#93; <a href="https://super.abril.com.br/blog/superlistas/8-elementos-quimicos-incriveis-da-tabela-periodica/">8 Elementos químicos invisíveis da tabela periódica</a></p>
 <p>&#91;3&#93; <a href="https://mundoeducacao.uol.com.br/quimica/marie-curie.htm#:~:text&#61;Em&#37;201898&#37;2C&#37;20Marie&#37;20anunciou&#37;20&#37;C3&#37;A0,Nobel&#37;20em&#37;20&#37;C3&#37;A1reas&#37;20cient&#37;C3&#37;ADficas&#37;20diferentes. ">Mundo Educação - Marie Curie</a></p>
 <p>&#91;4&#93; <a href="https://github.com/JuliaPhysics/PeriodicTable.jl">JuliaPhysics - PeriodicTable.jl</a></p>
-<h2 id=problemas_com_o_kernel_do_julia_no_jupyter_notebook ><a href="#problemas_com_o_kernel_do_julia_no_jupyter_notebook">Problemas com o Kernel do Julia no Jupyter Notebook</a></h2>
-<p>Para resolver problemas com o kernel do Julia no Jupyter instalado em seu computador, você digitar os comandos abaixo no REPL do Julia.</p>
-<pre><code class="julia-repl hljs">julia &gt; using Pkg
-julia &gt; Pkg.update()
-julia &gt; Pkg.build(&quot;IJulia&quot;)
-julia &gt; using IJulia; notebook()</code></pre>
-<p>Após digitar esses códigos, você deve voltar ao Jupyter e o kernel do Julia deverá estar funcionando normalmente.</p>
 <div class=page-foot >
   <div class=copyright >
-    &copy; Meneses&Araújo. Last modified: November 27, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+    &copy; Meneses&Araújo. Last modified: November 29, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
   </div>
 </div>
 </div>
