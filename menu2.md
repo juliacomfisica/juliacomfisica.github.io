@@ -166,7 +166,7 @@ A seguir vemos que os objetos `path_of_blue`e `path_of_gray`(caminho de `blue_ba
 Object(1:500, (args...)->path!(path_of_blue, pos(blue_ball), "blue"))
 Object(1:500, (args...)->path!(path_of_gray, pos(gray_ball), "gray"))
 ```
-Faça um teste. Apague ou comente (basta colocar # antes do código) a função `path!` e estas duas inhas acima para ver o que acontece. _Spoiler: Não haverá mais o desenho da trajetória em nossa simulação._ Va em frente e teste!
+Faça um teste. Apague ou comente (basta colocar # antes do código) a função `path!`. Faça o mesmo com  estas duas linhas acima para ver o que acontece. _Spoiler: O desenho da trajetória em nossa simulação desaoarecerá._ Vá em frente e teste!
 
 Finalmnte, o comando `render`, renderiza todos os objetos definidos no `video` que definimos como `myvideo` e o produz como um arquivo `gif`.
 ```
