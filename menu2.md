@@ -190,7 +190,7 @@ Agora sim, copie e cole o código em um ambiente Julia e o modifique quantas vez
 [1] [Javis.Jl](https://wikunia.github.io/Javis.jl/stable/)
 
 
-## Tabela Periódica 
+## Tabela Periódica - `PeriodicTable.jl`
 Em 2019 a tabela periódica completou 150 anos. Sua primeira versão, concebida, em 1789, por Antoine Lavoisier possuía 33 elementos químicos. Hoje, ela conta com 119 elementos, organizados sistematicamente de acordo com seus números atômicos, camadas eletrônicas, número de elétrons na camada de valência e propriedades físicas.\\
 Vários cientista contribuíram para o desenvolvimento dela, dentre eles se destaca a Física Marie Curie. Ela foi a primeira mulher a ganhar o prêmio Nobel e a primeira pessoa e única mulher a ganhá-lo por duas vezes. Um em Física ao demonstrar a existência da radioatividade natural em 1903 e outro em 1911, em Química, pela descoberta de dois novos elementos: o rádio e o polônio.
 
