@@ -171,8 +171,8 @@ julia&gt; Pluto.run()</code></pre>
 </annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.72777em;vertical-align:-0.08333em;"></span><span class=mord >−</span><span class=mord >0</span><span class=mord >.</span><span class=mord >8</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">o</span><span class="mord mathnormal">s</span><span class=mopen >(</span><span class=mord >2</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:0.69841em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">t</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >+</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class=mclose >)</span></span></span></span></span>
 <p>Para obter os gráficos desse movimento, você precisará digitar o seguinte código:</p>
 <pre><code class="julia hljs"><span class=hljs-keyword >begin</span>
-  <span class=hljs-keyword >import</span> Pkg
-  Pkg.activate(mktempdir())
+    <span class=hljs-keyword >import</span> Pkg
+    Pkg.activate(mktempdir())
 <span class=hljs-keyword >end</span></code></pre>
 <blockquote>
 <p><strong>Nota 2:</strong> Quando há várias expressões em uma célula, temos duas poções:</p>
@@ -187,8 +187,8 @@ julia&gt; Pluto.run()</code></pre>
 <p>Em seguida, adicione o pacote Plots ao ambiente, importe e finalmente escolha o <em>backend plotly</em>.</p>
 <p>Faça CRTL&#43;C, CRTL&#43;V do código abaixo no <code>Pluto.jl</code>.</p>
 <pre><code class="julia hljs"><span class=hljs-keyword >begin</span>
-  Pkg.add(<span class=hljs-string >&quot;Plots&quot;</span>)
-  <span class=hljs-keyword >using</span> Plots
+    Pkg.add(<span class=hljs-string >&quot;Plots&quot;</span>)
+    <span class=hljs-keyword >using</span> Plots
 <span class=hljs-keyword >end</span></code></pre>
 <pre><code class="julia hljs">plotly()</code></pre>
 <p>Para obter os gráficos de cada uma dessas funções, basta seguir o que está descrito na Figura a seguir.</p>
@@ -196,16 +196,17 @@ julia&gt; Pluto.run()</code></pre>
 
 <div style="clear: both"></div></div>
 <p>Coloquei o código abaixo para você copiar e colar no<code>Pluto.jl</code>.</p>
-<pre><code class="julia hljs">t = <span class=hljs-number >0</span>:<span class=hljs-number >0.01</span>:<span class=hljs-number >2</span><span class=hljs-literal >π</span>
-x = @. <span class=hljs-number >0.2</span> * cos(<span class=hljs-number >2</span>t + <span class=hljs-literal >π</span>)
-v = @. -<span class=hljs-number >0.4</span> * sin(<span class=hljs-number >2</span>t + <span class=hljs-literal >π</span>)
-α = @. -<span class=hljs-number >0.8</span> * cos(<span class=hljs-number >2</span>t + <span class=hljs-literal >π</span>)
-
-plot(t, x, label=<span class=hljs-string >&quot;x(t)&quot;</span>,color=:blue,lw=:<span class=hljs-number >3</span>,background_color=:lightblue)
-plot!(t, v, label=<span class=hljs-string >&quot;v(t)&quot;</span>,color=:red,lw=:<span class=hljs-number >3</span>)
-plot!(t, α , label=<span class=hljs-string >&quot;α(t)&quot;</span>,color=:green,lw=:<span class=hljs-number >3</span>)
-plot!(xlab=<span class=hljs-string >&quot;tempo (s)&quot;</span>)
-plot!(legend=:outertopright)</code></pre>
+<pre><code class="julia hljs"><span class=hljs-keyword >begin</span>
+    t = <span class=hljs-number >0</span>:<span class=hljs-number >0.01</span>:<span class=hljs-number >2</span><span class=hljs-literal >π</span>
+    x = @. <span class=hljs-number >0.2</span> * cos(<span class=hljs-number >2</span>t + <span class=hljs-literal >π</span>)
+    v = @. -<span class=hljs-number >0.4</span> * sin(<span class=hljs-number >2</span>t + <span class=hljs-literal >π</span>)
+    α = @. -<span class=hljs-number >0.8</span> * cos(<span class=hljs-number >2</span>t + <span class=hljs-literal >π</span>)
+    plot(t, x, label=<span class=hljs-string >&quot;x(t)&quot;</span>,color=:blue,lw=:<span class=hljs-number >3</span>,background_color=:lightblue)
+    plot!(t, v, label=<span class=hljs-string >&quot;v(t)&quot;</span>,color=:red,lw=:<span class=hljs-number >3</span>)
+    plot!(t, α , label=<span class=hljs-string >&quot;α(t)&quot;</span>,color=:green,lw=:<span class=hljs-number >3</span>)
+    plot!(xlab=<span class=hljs-string >&quot;tempo (s)&quot;</span>)
+    plot!(legend=:outertopright)
+<span class=hljs-keyword >end</span></code></pre>
 <p>Observe que nas funções, aparece um &#40;@.&#41;<sup id="fnref:7"><a href="#fndef:7" class=fnref >[7]</a></sup> após o sinal de igual. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.</p>
 <p>Agora chegou a sua vez de testar o <code>Pluto.jl</code>. Escolha outras funções e pacotes.</p>
 <p><table class=fndef  id="fndef:5">
