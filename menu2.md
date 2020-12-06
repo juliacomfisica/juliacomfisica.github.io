@@ -196,6 +196,128 @@ Agora sim, copie e cole o código em um ambiente Julia e o modifique quantas vez
 
 [1] [Javis.Jl](https://wikunia.github.io/Javis.jl/stable/)
 
+## _Notebook_ `Pluto.jl`
+
+Uma opção ao _notebook_ Jupyter é o _notebook_ `Pluto.jl` ele é inscrito em Julia puro, fácil de instalar e é reativo, ou seja, ao alterar uma função ou variável ele atualiza automaticamente todas as células afetadas por essa alteração.
+
+> **Nota 1:** Para utilizar o `Pluto.jl`você vai precisar de:
+>1. Ter instalado o Julia instalado em seu computador. Dê preferência a v1.5 ela é a mais rápida;
+>2. Ter em seu computador o sistema operacional Linux, macOS ou Windows. No _Linux e macOS_ o `Pluto.Jl`funcionará melhor;
+>3. E finalmente ter o navegador Mozilla **Firefox** ou Google **Chrome** instalado, certifique-se de obter a versão mais recente.
+
+* **Instalação**
+
+1. O primeiro passo é instalar o [Julia](https://julialang.org/) em seu computador[^1];
+
+2. Após a instalação, execute o Julia e adicione o pacote digitando:
+
+```
+julia> ]
+(v1.5) pkg> add Pluto
+```
+_A instalação demorará alguns minutos._\\
+
+Essa instalação é necessária uma única vez. Porém, Sempre que for utilizar o `Pluto.jl` você deve digitar
+
+```
+julia> import Pluto
+julia> Pluto.run()
+```
+Pronto! O `Pluto.jl` será aberto no seu navegador e agora lhe resta começar.
+
+* **Exemplo de uso do `Pluto.jl`com o pacote `Plots.jl`[^2]**
+
+Imagine que você esteja analisando um sistema massa-mola que realiza um movimento harmônico simples (MHS) descrito pelas seguintes funções:
+
+ \begin{equation}
+ x=0.2 \cdot cos(2 \cdot t+ \pi )
+\end{equation}
+\begin{equation}
+ v=-0.4 \cdot sen(2 \cdot t+ \pi )
+\end{equation}
+\begin{equation}
+\alpha=-0.8 \cdot cos(2 \cdot t+ \pi )
+\end{equation}
+
+Suponha que queremos obter os gráficos desse movimento. Como devemos proceder? O primeiro passo é digitar o código abaixo:
+
+@@row
+@@left ![](/assets/pluto1.png) @@
+~~~
+<div style="clear: both"></div>
+~~~
+@@
+
+Copie e cole no `Pluto.jl`o código abaixo. Va lá! eu já digitei por você. Teste!
+```
+begin
+  import Pkg
+  Pkg.activate(mktempdir())
+end
+```
+
+> **Nota 2:** Quando há várias expressões em uma célula, temos duas poções:
+>1. Dividir a célula de tal forma que cada célula tenha apenas uma expressão;
+>2. Envolver todo o código em um bloco de _begin_..._end_.
+Essa ação é necessária para configurarmos um ambiente de pacote limpo.
+
+Em seguida, adicionamos o pacote Plots ao nosso ambiente, o importamos e finalmente escolhemos o _backend plotly_.
+
+@@row
+@@left ![](/assets/pluto2.png) @@
+~~~
+<div style="clear: both"></div>
+~~~
+@@
+
+Novamente, faça CRTL+C, CRTL+V do código abaixo no `Pluto.jl`.
+
+```
+begin
+  Pkg.add("Plots")
+  using Plots
+end
+```
+
+```
+plotly()
+```
+ Para obter os gráficos portamento de cada uma dessas funções está descrito na Figura a seguir.
+
+@@row
+@@left ![](/assets/pluto3.png) @@
+~~~
+<div style="clear: both"></div>
+~~~
+@@
+
+Coloquei o código abaixo que você pudesse finalizar seu teste. Vá em frente copie e cole.
+```
+t = 0:0.01:2π
+x = @. 0.2 * cos(2t + π)
+v = @. -0.4 * sin(2t + π)
+α = @. -0.8 * cos(2t + π)
+
+plot(t, x, label="x(t)",color=:blue,lw=:3,background_color=:lightblue)
+plot!(t, v, label="v(t)",color=:red,lw=:3)
+plot!(t, α , label="α(t)",color=:green,lw=:3)
+plot!(xlab="tempo (s)")
+plot!(legend=:outertopright)
+```
+
+Note que aparece um (@.)[^3] na frente das funções. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.
+
+Agora, chegou sua vez de testar o `Pluto.jl`. Teste outras funções e pacotes no ambiente. 
+
+
+[^1]: O processo de instalação do Julia é descrito com detalhes no capítluo 1 do livro `Julia com Física: Uma Introdução`.
+[^2]: O uso do pacote `Plots.jl`é descutido em detalhes no capítluo 4 do livro `Julia com Física: Uma Introdução`.
+[^3]: O uso do (@.) é descutido em detalhes no capítluo 7, quando falamos de broadcasting, do livro `Julia com Física: Uma Introdução`.
+
+* **Referência**
+
+[1] [Pluto.Jl](https://github.com/fonsp/Pluto.jl)
+
 
 ## Tabela Periódica - `PeriodicTable.jl`
 Em 2019 a tabela periódica completou 150 anos. Sua primeira versão, concebida, em 1789, por Antoine Lavoisier possuía 33 elementos químicos. Hoje, ela conta com 119 elementos, organizados sistematicamente de acordo com seus números atômicos, camadas eletrônicas, número de elétrons na camada de valência e propriedades físicas.\\
