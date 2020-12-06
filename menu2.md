@@ -207,7 +207,7 @@ Uma opção ao _notebook_ Jupyter é o _notebook_ `Pluto.jl` ele é inscrito em 
 
 * **Instalação**
 
-1. O primeiro passo é instalar o [Julia](https://julialang.org/) em seu computador[^1];
+1. O primeiro passo é instalar o [Julia](https://julialang.org/) em seu computador[^4];
 
 2. Após a instalação, execute o Julia e adicione o pacote digitando:
 
@@ -225,7 +225,7 @@ julia> Pluto.run()
 ```
 Pronto! O `Pluto.jl` será aberto no seu navegador e agora lhe resta começar.
 
-* **Exemplo de uso do `Pluto.jl`com o pacote `Plots.jl`[^2]**
+* **Exemplo de uso do `Pluto.jl`com o pacote `Plots.jl`[^5]**
 
 Imagine que você esteja analisando um sistema massa-mola que realiza um movimento harmônico simples (MHS) descrito pelas seguintes funções:
 
@@ -291,7 +291,8 @@ plotly()
 ~~~
 @@
 
-Coloquei o código abaixo que você pudesse finalizar seu teste. Vá em frente copie e cole.
+Coloquei o código abaixo que você pudesse finalizar seu teste. Vá em frente copie e cole mais uma vez no `Pluto.jl`.
+
 ```
 t = 0:0.01:2π
 x = @. 0.2 * cos(2t + π)
@@ -305,14 +306,14 @@ plot!(xlab="tempo (s)")
 plot!(legend=:outertopright)
 ```
 
-Note que aparece um (@.)[^3] na frente das funções. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.
+Note que aparece um (@.)[^6] na frente das funções. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.
 
 Agora, chegou sua vez de testar o `Pluto.jl`. Teste outras funções e pacotes no ambiente. 
 
 
-[^1]: O processo de instalação do Julia é descrito com detalhes no capítluo 1 do livro `Julia com Física: Uma Introdução`.
-[^2]: O uso do pacote `Plots.jl`é descutido em detalhes no capítluo 4 do livro `Julia com Física: Uma Introdução`.
-[^3]: O uso do (@.) é descutido em detalhes no capítluo 7, quando falamos de broadcasting, do livro `Julia com Física: Uma Introdução`.
+[^4]: O processo de instalação do Julia é descrito com detalhes no capítluo 1 do livro `Julia com Física: Uma Introdução`.
+[^5]: O uso do pacote `Plots.jl`é descutido em detalhes no capítluo 4 do livro `Julia com Física: Uma Introdução`.
+[^6]: O uso do (@.) é descutido em detalhes no capítluo 7, quando falamos de broadcasting, do livro `Julia com Física: Uma Introdução`.
 
 * **Referência**
 
