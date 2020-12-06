@@ -184,8 +184,8 @@ Agora sim, copie e cole o código em um ambiente Julia e o modifique quantas vez
 [^3]: O conceito de arrays (vetores e matrizes) é explicado em detalhe no capítulo 4 do livro `Julia com Física: Uma Introdução`.
 [^4]: O conceito de função anônima é explicado no capítulo 6  do livro `Julia com Física: Uma Introdução`. 
 
-Autores: Adeil Araújo e Meirivâni Oliveira
-Data: 06.dez.2020
+**Autores:** [Adeil Araújo](https://adeil83.github.io/) e Meirivâni Oliveira\\
+**Data:** 06.dez.2020
 
 * **O pacote foi desenvolvido por:**
 
