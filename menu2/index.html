@@ -126,11 +126,11 @@ Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (a
 </ul>
 <p>&#91;1&#93; <a href="https://wikunia.github.io/Javis.jl/stable/">Javis.Jl</a></p>
 <h2 id=notebook_plutojl ><a href="#notebook_plutojl"><em>Notebook</em> <code>Pluto.jl</code></a></h2>
-<p>Uma opção ao <em>notebook</em> Jupyter é o <em>notebook</em> <code>Pluto.jl</code>. Ele foi escrito em Julia puro e é super fácil de instalar, além de ser reativo, ou seja, ao alterar uma função ou variável ele atualiza automaticamente todas as células afetadas por essa alteração.</p>
+<p>Uma opção ao <em>notebook</em> Jupyter é o <em>notebook</em> <code>Pluto.jl</code>. Ele foi escrito em Julia puro e é super fácil de instalar, além de ser reativo, ou seja, ao alterar uma função ou variável, ele atualiza automaticamente todas as células afetadas por essa alteração.</p>
 <blockquote>
 <p><strong>Nota 1:</strong> Para utilizar o <code>Pluto.jl</code>você vai precisar:</p>
 <ol>
-<li><p>ter instalado o Julia em seu computador. De preferência a versão v1.5, po ser mais rápida;</p>
+<li><p>ter instalado o Julia em seu computador. Dê preferência a versão v1.5, por ser mais rápida;</p>
 
 <li><p>ter em seu computador o sistema operacional Linux, macOS ou Windows. No <em>Linux e macOS</em> o <code>Pluto.Jl</code>funcionará melhor;</p>
 
@@ -169,7 +169,7 @@ julia&gt; Pluto.run()</code></pre>
 <span class=katex-display ><span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML" display=block ><semantics><mrow><mi>α</mi><mo>=</mo><mo>−</mo><mn>0.8</mn><mo>⋅</mo><mi>c</mi><mi>o</mi><mi>s</mi><mo stretchy=false >(</mo><mn>2</mn><mo>⋅</mo><mi>t</mi><mo>+</mo><mi>π</mi><mo stretchy=false >)</mo></mrow><annotation encoding="application/x-tex">
 \alpha=-0.8 \cdot cos(2 \cdot t+ \pi )
 </annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.72777em;vertical-align:-0.08333em;"></span><span class=mord >−</span><span class=mord >0</span><span class=mord >.</span><span class=mord >8</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">o</span><span class="mord mathnormal">s</span><span class=mopen >(</span><span class=mord >2</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:0.69841em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">t</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >+</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class=mclose >)</span></span></span></span></span>
-<p>Para obter os gráficos desse movimento, você precisa digitar o seguinte código:</p>
+<p>Para obter os gráficos desse movimento, você precisará digitar o seguinte código:</p>
 <pre><code class="julia hljs"><span class=hljs-keyword >begin</span>
   <span class=hljs-keyword >import</span> Pkg
   Pkg.activate(mktempdir())
@@ -183,19 +183,19 @@ julia&gt; Pluto.run()</code></pre>
 
 </ol>
 </blockquote>
-<p>Essa ação é necessária para configurarmos um ambiente de pacote limpo.</p>
+<p>Essa ação é necessária para configurar um ambiente de pacote limpo.</p>
 <p>Em seguida, adicione o pacote Plots ao ambiente, importe e finalmente escolha o <em>backend plotly</em>.</p>
-<p>Novamente, faça CRTL&#43;C, CRTL&#43;V do código abaixo no <code>Pluto.jl</code>.</p>
+<p>Faça CRTL&#43;C, CRTL&#43;V do código abaixo no <code>Pluto.jl</code>.</p>
 <pre><code class="julia hljs"><span class=hljs-keyword >begin</span>
   Pkg.add(<span class=hljs-string >&quot;Plots&quot;</span>)
   <span class=hljs-keyword >using</span> Plots
 <span class=hljs-keyword >end</span></code></pre>
 <pre><code class="julia hljs">plotly()</code></pre>
-<p>Para obter os gráficos portamento de cada uma dessas funções está descrito na Figura a seguir.</p>
+<p>Para obter os gráficos de cada uma dessas funções, basta seguir o que está descrito na Figura a seguir.</p>
 <div class=row ><div class=left ><img src="/assets/pluto3.png" alt="" /></div>
 
 <div style="clear: both"></div></div>
-<p>Coloquei o código abaixo que você pudesse finalizar seu teste. Vá em frente copie e cole mais uma vez no <code>Pluto.jl</code>.</p>
+<p>Coloquei o código abaixo para você copiar e colar no<code>Pluto.jl</code>.</p>
 <pre><code class="julia hljs">t = <span class=hljs-number >0</span>:<span class=hljs-number >0.01</span>:<span class=hljs-number >2</span><span class=hljs-literal >π</span>
 x = @. <span class=hljs-number >0.2</span> * cos(<span class=hljs-number >2</span>t + <span class=hljs-literal >π</span>)
 v = @. -<span class=hljs-number >0.4</span> * sin(<span class=hljs-number >2</span>t + <span class=hljs-literal >π</span>)
@@ -206,8 +206,8 @@ plot!(t, v, label=<span class=hljs-string >&quot;v(t)&quot;</span>,color=:red,lw
 plot!(t, α , label=<span class=hljs-string >&quot;α(t)&quot;</span>,color=:green,lw=:<span class=hljs-number >3</span>)
 plot!(xlab=<span class=hljs-string >&quot;tempo (s)&quot;</span>)
 plot!(legend=:outertopright)</code></pre>
-<p>Note que aparece um &#40;@.&#41;<sup id="fnref:7"><a href="#fndef:7" class=fnref >[7]</a></sup> na frente das funções. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.</p>
-<p>Agora, chegou sua vez de testar o <code>Pluto.jl</code>. Teste outras funções e pacotes no ambiente. </p>
+<p>Observe que nas funções, aparece um &#40;@.&#41;<sup id="fnref:7"><a href="#fndef:7" class=fnref >[7]</a></sup> após o sinal de igual. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.</p>
+<p>Agora chegou a sua vez de testar o <code>Pluto.jl</code>. Escolha outras funções e pacotes.</p>
 <p><table class=fndef  id="fndef:5">
     <tr>
         <td class=fndef-backref ><a href="#fnref:5">[5]</a>
@@ -217,13 +217,13 @@ plot!(legend=:outertopright)</code></pre>
 <table class=fndef  id="fndef:6">
     <tr>
         <td class=fndef-backref ><a href="#fnref:6">[6]</a>
-        <td class=fndef-content >O uso do pacote <code>Plots.jl</code>é descutido em detalhes no capítluo 4 do livro <code>Julia com Física: Uma Introdução</code>.
+        <td class=fndef-content >O uso do pacote <code>Plots.jl</code>é discutido em detalhes no capítluo 4 do livro <code>Julia com Física: Uma Introdução</code>.
     
 </table>
 <table class=fndef  id="fndef:7">
     <tr>
         <td class=fndef-backref ><a href="#fnref:7">[7]</a>
-        <td class=fndef-content >O uso do &#40;@.&#41; é descutido em detalhes no capítluo 7, quando falamos de broadcasting, do livro <code>Julia com Física: Uma Introdução</code>.
+        <td class=fndef-content >O uso do &#40;@.&#41; é discutido em detalhes no capítluo 7, quando falamos de broadcasting, no livro <code>Julia com Física: Uma Introdução</code>.
     
 </table>
 </p>
