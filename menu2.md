@@ -198,12 +198,12 @@ Agora sim, copie e cole o código em um ambiente Julia e o modifique quantas vez
 
 ## _Notebook_ `Pluto.jl`
 
-Uma opção ao _notebook_ Jupyter é o _notebook_ `Pluto.jl` ele é inscrito em Julia puro, fácil de instalar e é reativo, ou seja, ao alterar uma função ou variável ele atualiza automaticamente todas as células afetadas por essa alteração.
+Uma opção ao _notebook_ Jupyter é o _notebook_ `Pluto.jl`. Ele foi escrito em Julia puro e é super fácil de instalar, além de ser reativo, ou seja, ao alterar uma função ou variável ele atualiza automaticamente todas as células afetadas por essa alteração.
 
-> **Nota 1:** Para utilizar o `Pluto.jl`você vai precisar de:
->1. Ter instalado o Julia instalado em seu computador. Dê preferência a v1.5 ela é a mais rápida;
->2. Ter em seu computador o sistema operacional Linux, macOS ou Windows. No _Linux e macOS_ o `Pluto.Jl`funcionará melhor;
->3. E finalmente ter o navegador Mozilla **Firefox** ou Google **Chrome** instalado, certifique-se de obter a versão mais recente.
+> **Nota 1:** Para utilizar o `Pluto.jl`você vai precisar:
+>1. ter instalado o Julia em seu computador. De preferência a versão v1.5, po ser mais rápida;
+>2. ter em seu computador o sistema operacional Linux, macOS ou Windows. No _Linux e macOS_ o `Pluto.Jl`funcionará melhor;
+>3. ter instalado o navegador Mozilla **Firefox** ou Google **Chrome**. Certifique-se de obter a versão mais recente.
 
 * **Instalação**
 
@@ -217,15 +217,15 @@ julia> ]
 ```
 _A instalação demorará alguns minutos._\\
 
-Essa instalação é necessária uma única vez. Porém, Sempre que for utilizar o `Pluto.jl` você deve digitar
+Essa instalação é necessária uma única vez, no entanto, sempre que for utilizar o `Pluto.jl` você deverá digitar:
 
 ```
 julia> import Pluto
 julia> Pluto.run()
 ```
-Pronto! O `Pluto.jl` será aberto no seu navegador e agora lhe resta começar.
+Pronto! O `Pluto.jl` será aberto no seu navegador e agora só lhe resta começar.
 
-* **Exemplo de uso do `Pluto.jl`com o pacote `Plots.jl`[^6]**
+* **Exemplo do uso do `Pluto.jl`com o pacote `Plots.jl`[^6]**
 
 Imagine que você esteja analisando um sistema massa-mola que realiza um movimento harmônico simples (MHS) descrito pelas seguintes funções:
 
@@ -239,16 +239,8 @@ Imagine que você esteja analisando um sistema massa-mola que realiza um movimen
 \alpha=-0.8 \cdot cos(2 \cdot t+ \pi )
 \end{equation}
 
-Suponha que queremos obter os gráficos desse movimento. Como devemos proceder? O primeiro passo é digitar o código abaixo:
+Para obter os gráficos desse movimento, você precisa digitar o seguinte código:
 
-@@row
-@@left ![](/assets/pluto1.png) @@
-~~~
-<div style="clear: both"></div>
-~~~
-@@
-
-Copie e cole no `Pluto.jl`o código abaixo. Va lá! eu já digitei por você. Teste!
 ```
 begin
   import Pkg
@@ -261,14 +253,8 @@ end
 >2. Envolver todo o código em um bloco de _begin_..._end_.
 Essa ação é necessária para configurarmos um ambiente de pacote limpo.
 
-Em seguida, adicionamos o pacote Plots ao nosso ambiente, o importamos e finalmente escolhemos o _backend plotly_.
+Em seguida, adicione o pacote Plots ao ambiente, importe e finalmente escolha o _backend plotly_.
 
-@@row
-@@left ![](/assets/pluto2.png) @@
-~~~
-<div style="clear: both"></div>
-~~~
-@@
 
 Novamente, faça CRTL+C, CRTL+V do código abaixo no `Pluto.jl`.
 
