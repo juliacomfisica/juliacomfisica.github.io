@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/katex/katex.min.css"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/basic.css"> <link rel=icon  href="/assets/favicon.png"> <title>Blog</title> <header> <div class=blog-name ><a href="">Julia com Física</a></div> <nav> <ul> <li><a href="/">Apresentação</a> <li><a href="/menu1/">Notas</a> <li><a href="/menu2/">Blog</a> <li><a href="/menu3/">Errata</a> </ul> <img src="/assets/hamburger.svg" id=menu-icon > </nav> </header> <div class=franklin-content ><h1 id=blog ><a href="#blog">Blog</a></h1> <div class=franklin-toc ><ol><li><a href="#animações_em_julia_com_o_javisjl">Animações em Julia com o <code>Javis.jl</code></a><li><a href="#tabela_periódica_-_periodictablejl">Tabela Periódica - <code>PeriodicTable.jl</code></a></ol></div> <h2 id="animações_em_julia_com_o_javisjl"><a href="#animações_em_julia_com_o_javisjl">Animações em Julia com o <code>Javis.jl</code></a></h2> <p>Seguindo este tutorial passo a passo você obterá, ao final, a seguinte animação:</p> <div class=row ><div class=left ><img src="/assets/orbita_oficial1.gif" alt="" /></div> <div style="clear: both"></div></div> <p>Abaixo, apresentamos o código para a animação acima. Mas, antes de dar um <strong>Ctrl&#43;C</strong>, <strong>CtrL&#43;V</strong> para um ambiente Julia, como o Jupyter por exemplo, vamos entender os principais pontos do código?</p> <blockquote> <p><strong>Nota 1:</strong> Teste o código a seguir no REPL do Julia ou no Jupyter instalado em sua máquina. Não obtivemos êxito em ambientes <em>online</em>.</p> </blockquote> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Javis
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/katex/katex.min.css"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/basic.css"> <link rel=icon  href="/assets/favicon.png"> <title>Blog</title> <header> <div class=blog-name ><a href="">Julia com Física</a></div> <nav> <ul> <li><a href="/">Apresentação</a> <li><a href="/menu1/">Notas</a> <li><a href="/menu2/">Blog</a> <li><a href="/menu3/">Errata</a> </ul> <img src="/assets/hamburger.svg" id=menu-icon > </nav> </header> <div class=franklin-content ><h1 id=blog ><a href="#blog">Blog</a></h1> <div class=franklin-toc ><ol><li><a href="#animações_em_julia_com_o_javisjl">Animações em Julia com o <code>Javis.jl</code></a><li><a href="#notebook_plutojl"><em>Notebook</em> <code>Pluto.jl</code></a><li><a href="#tabela_periódica_-_periodictablejl">Tabela Periódica - <code>PeriodicTable.jl</code></a></ol></div> <h2 id="animações_em_julia_com_o_javisjl"><a href="#animações_em_julia_com_o_javisjl">Animações em Julia com o <code>Javis.jl</code></a></h2> <p>Seguindo este tutorial passo a passo você obterá, ao final, a seguinte animação:</p> <div class=row ><div class=left ><img src="/assets/orbita_oficial1.gif" alt="" /></div> <div style="clear: both"></div></div> <p>Abaixo, apresentamos o código para a animação acima. Mas, antes de dar um <strong>Ctrl&#43;C</strong>, <strong>CtrL&#43;V</strong> para um ambiente Julia, como o Jupyter por exemplo, vamos entender os principais pontos do código?</p> <blockquote> <p><strong>Nota 1:</strong> Teste o código a seguir no REPL do Julia ou no Jupyter instalado em sua máquina. Não obtivemos êxito em ambientes <em>online</em>.</p> </blockquote> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Javis
 
 <span class=hljs-keyword >function</span> ground(args...)
     background(<span class=hljs-string >&quot;black&quot;</span>) <span class=hljs-comment ># Cor de fundo da tela</span>
@@ -125,6 +125,120 @@ Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (a
 
 </ul>
 <p>&#91;1&#93; <a href="https://wikunia.github.io/Javis.jl/stable/">Javis.Jl</a></p>
+<h2 id=notebook_plutojl ><a href="#notebook_plutojl"><em>Notebook</em> <code>Pluto.jl</code></a></h2>
+<p>Uma opção ao <em>notebook</em> Jupyter é o <em>notebook</em> <code>Pluto.jl</code> ele é inscrito em Julia puro, fácil de instalar e é reativo, ou seja, ao alterar uma função ou variável ele atualiza automaticamente todas as células afetadas por essa alteração.</p>
+<blockquote>
+<p><strong>Nota 1:</strong> Para utilizar o <code>Pluto.jl</code>você vai precisar de:</p>
+<ol>
+<li><p>Ter instalado o Julia instalado em seu computador. Dê preferência a v1.5 ela é a mais rápida;</p>
+
+<li><p>Ter em seu computador o sistema operacional Linux, macOS ou Windows. No <em>Linux e macOS</em> o <code>Pluto.Jl</code>funcionará melhor;</p>
+
+<li><p>E finalmente ter o navegador Mozilla <strong>Firefox</strong> ou Google <strong>Chrome</strong> instalado, certifique-se de obter a versão mais recente.</p>
+
+</ol>
+</blockquote>
+<ul>
+<li><p><strong>Instalação</strong></p>
+
+</ul>
+<ol>
+<li><p>O primeiro passo é instalar o <a href="https://julialang.org/">Julia</a> em seu computador<sup id="fnref:1"><a href="#fndef:1" class=fnref >[1]</a></sup>;</p>
+
+<li><p>Após a instalação, execute o Julia e adicione o pacote digitando:</p>
+
+</ol>
+<pre><code class="julia hljs">julia&gt; ]
+(v1<span class=hljs-number >.5</span>) pkg&gt; add Pluto</code></pre>
+<p><em>A instalação demorará alguns minutos.</em><br/></p>
+<p>Essa instalação é necessária uma única vez. Porém, Sempre que for utilizar o <code>Pluto.jl</code> você deve digitar</p>
+<pre><code class="julia hljs">julia&gt; <span class=hljs-keyword >import</span> Pluto
+julia&gt; Pluto.run()</code></pre>
+<p>Pronto&#33; O <code>Pluto.jl</code> será aberto no seu navegador e agora lhe resta começar.</p>
+<ul>
+<li><p><strong>Exemplo de uso do <code>Pluto.jl</code>com o pacote <code>Plots.jl</code><sup id="fnref:2"><a href="#fndef:2" class=fnref >[2]</a></sup></strong></p>
+
+</ul>
+<p>Imagine que você esteja analisando um sistema massa-mola que realiza um movimento harmônico simples &#40;MHS&#41; descrito pelas seguintes funções:</p>
+<span class=katex-display ><span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML" display=block ><semantics><mrow><mi>x</mi><mo>=</mo><mn>0.2</mn><mo>⋅</mo><mi>c</mi><mi>o</mi><mi>s</mi><mo stretchy=false >(</mo><mn>2</mn><mo>⋅</mo><mi>t</mi><mo>+</mo><mi>π</mi><mo stretchy=false >)</mo></mrow><annotation encoding="application/x-tex">
+ x=0.2 \cdot cos(2 \cdot t+ \pi )
+</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >0</span><span class=mord >.</span><span class=mord >2</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">o</span><span class="mord mathnormal">s</span><span class=mopen >(</span><span class=mord >2</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:0.69841em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">t</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >+</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class=mclose >)</span></span></span></span></span>
+<span class=katex-display ><span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML" display=block ><semantics><mrow><mi>v</mi><mo>=</mo><mo>−</mo><mn>0.4</mn><mo>⋅</mo><mi>s</mi><mi>e</mi><mi>n</mi><mo stretchy=false >(</mo><mn>2</mn><mo>⋅</mo><mi>t</mi><mo>+</mo><mi>π</mi><mo stretchy=false >)</mo></mrow><annotation encoding="application/x-tex">
+ v=-0.4 \cdot sen(2 \cdot t+ \pi )
+</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.72777em;vertical-align:-0.08333em;"></span><span class=mord >−</span><span class=mord >0</span><span class=mord >.</span><span class=mord >4</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class=mopen >(</span><span class=mord >2</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:0.69841em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">t</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >+</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class=mclose >)</span></span></span></span></span>
+<span class=katex-display ><span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML" display=block ><semantics><mrow><mi>α</mi><mo>=</mo><mo>−</mo><mn>0.8</mn><mo>⋅</mo><mi>c</mi><mi>o</mi><mi>s</mi><mo stretchy=false >(</mo><mn>2</mn><mo>⋅</mo><mi>t</mi><mo>+</mo><mi>π</mi><mo stretchy=false >)</mo></mrow><annotation encoding="application/x-tex">
+\alpha=-0.8 \cdot cos(2 \cdot t+ \pi )
+</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.72777em;vertical-align:-0.08333em;"></span><span class=mord >−</span><span class=mord >0</span><span class=mord >.</span><span class=mord >8</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">o</span><span class="mord mathnormal">s</span><span class=mopen >(</span><span class=mord >2</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:0.69841em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">t</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >+</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class=mclose >)</span></span></span></span></span>
+<p>Suponha que queremos obter os gráficos desse movimento. Como devemos proceder? O primeiro passo é digitar o código abaixo:</p>
+<div class=row ><div class=left ><img src="/assets/pluto1.png" alt="" /></div>
+
+<div style="clear: both"></div></div>
+<p>Copie e cole no <code>Pluto.jl</code>o código abaixo. Va lá&#33; eu já digitei por você. Teste&#33;</p>
+<pre><code class="julia hljs"><span class=hljs-keyword >begin</span>
+  <span class=hljs-keyword >import</span> Pkg
+  Pkg.activate(mktempdir())
+<span class=hljs-keyword >end</span></code></pre>
+<blockquote>
+<p><strong>Nota 2:</strong> Quando há várias expressões em uma célula, temos duas poções:</p>
+<ol>
+<li><p>Dividir a célula de tal forma que cada célula tenha apenas uma expressão;</p>
+
+<li><p>Envolver todo o código em um bloco de <em>begin</em>...<em>end</em>.</p>
+
+</ol>
+</blockquote>
+<p>Essa ação é necessária para configurarmos um ambiente de pacote limpo.</p>
+<p>Em seguida, adicionamos o pacote Plots ao nosso ambiente, o importamos e finalmente escolhemos o <em>backend plotly</em>.</p>
+<div class=row ><div class=left ><img src="/assets/pluto2.png" alt="" /></div>
+
+<div style="clear: both"></div></div>
+<p>Novamente, faça CRTL&#43;C, CRTL&#43;V do código abaixo no <code>Pluto.jl</code>.</p>
+<pre><code class="julia hljs"><span class=hljs-keyword >begin</span>
+  Pkg.add(<span class=hljs-string >&quot;Plots&quot;</span>)
+  <span class=hljs-keyword >using</span> Plots
+<span class=hljs-keyword >end</span></code></pre>
+<pre><code class="julia hljs">plotly()</code></pre>
+<p>Para obter os gráficos portamento de cada uma dessas funções está descrito na Figura a seguir.</p>
+<div class=row ><div class=left ><img src="/assets/pluto3.png" alt="" /></div>
+
+<div style="clear: both"></div></div>
+<p>Coloquei o código abaixo que você pudesse finalizar seu teste. Vá em frente copie e cole.</p>
+<pre><code class="julia hljs">t = <span class=hljs-number >0</span>:<span class=hljs-number >0.01</span>:<span class=hljs-number >2</span><span class=hljs-literal >π</span>
+x = @. <span class=hljs-number >0.2</span> * cos(<span class=hljs-number >2</span>t + <span class=hljs-literal >π</span>)
+v = @. -<span class=hljs-number >0.4</span> * sin(<span class=hljs-number >2</span>t + <span class=hljs-literal >π</span>)
+α = @. -<span class=hljs-number >0.8</span> * cos(<span class=hljs-number >2</span>t + <span class=hljs-literal >π</span>)
+
+plot(t, x, label=<span class=hljs-string >&quot;x(t)&quot;</span>,color=:blue,lw=:<span class=hljs-number >3</span>,background_color=:lightblue)
+plot!(t, v, label=<span class=hljs-string >&quot;v(t)&quot;</span>,color=:red,lw=:<span class=hljs-number >3</span>)
+plot!(t, α , label=<span class=hljs-string >&quot;α(t)&quot;</span>,color=:green,lw=:<span class=hljs-number >3</span>)
+plot!(xlab=<span class=hljs-string >&quot;tempo (s)&quot;</span>)
+plot!(legend=:outertopright)</code></pre>
+<p>Note que aparece um &#40;@.&#41;<sup id="fnref:3"><a href="#fndef:3" class=fnref >[3]</a></sup> na frente das funções. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.</p>
+<p>Agora, chegou sua vez de testar o <code>Pluto.jl</code>. Teste outras funções e pacotes no ambiente. </p>
+<p><table class=fndef  id="fndef:1">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:1">[1]</a>
+        <td class=fndef-content >O processo de instalação do Julia é descrito com detalhes no capítluo 1 do livro <code>Julia com Física: Uma Introdução</code>.
+    
+</table>
+<table class=fndef  id="fndef:2">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:2">[2]</a>
+        <td class=fndef-content >O uso do pacote <code>Plots.jl</code>é descutido em detalhes no capítluo 4 do livro <code>Julia com Física: Uma Introdução</code>.
+    
+</table>
+<table class=fndef  id="fndef:3">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:3">[3]</a>
+        <td class=fndef-content >O uso do &#40;@.&#41; é descutido em detalhes no capítluo 7, quando falamos de broadcasting, do livro <code>Julia com Física: Uma Introdução</code>.
+    
+</table>
+</p>
+<ul>
+<li><p><strong>Referência</strong></p>
+
+</ul>
+<p>&#91;1&#93; <a href="https://github.com/fonsp/Pluto.jl">Pluto.Jl</a></p>
 <h2 id="tabela_periódica_-_periodictablejl"><a href="#tabela_periódica_-_periodictablejl">Tabela Periódica - <code>PeriodicTable.jl</code></a></h2>
 <p>Em 2019 a tabela periódica completou 150 anos. Sua primeira versão, concebida, em 1789, por Antoine Lavoisier possuía 33 elementos químicos. Hoje, ela conta com 119 elementos, organizados sistematicamente de acordo com seus números atômicos, camadas eletrônicas, número de elétrons na camada de valência e propriedades físicas.<br/> Vários cientista contribuíram para o desenvolvimento dela, dentre eles se destaca a Física Marie Curie. Ela foi a primeira mulher a ganhar o prêmio Nobel e a primeira pessoa e única mulher a ganhá-lo por duas vezes. Um em Física ao demonstrar a existência da radioatividade natural em 1903 e outro em 1911, em Química, pela descoberta de dois novos elementos: o rádio e o polônio.</p>
 <p>Em Julia há um pacote que nos permite acessar os elementos da tabela periódica, chama-se <code>PeriodicTable.jl</code>. Primeiramente precisamos instalá-lo. Para isso, basta digitar no REPL do Julia o código a seguir e pressionar Enter.</p>
