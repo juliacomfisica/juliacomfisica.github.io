@@ -1,38 +1,38 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/katex/katex.min.css"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/basic.css"> <link rel=icon  href="/assets/favicon.png"> <title>Blog</title> <header> <div class=blog-name ><a href="">Julia com Física</a></div> <nav> <ul> <li><a href="/">Apresentação</a> <li><a href="/menu1/">Notas</a> <li><a href="/menu2/">Blog</a> <li><a href="/menu3/">Errata</a> </ul> <img src="/assets/hamburger.svg" id=menu-icon > </nav> </header> <div class=franklin-content ><h1 id=blog ><a href="#blog">Blog</a></h1> <div class=franklin-toc ><ol><li><a href="#animações_em_julia_com_o_javisjl">Animações em Julia com o <code>Javis.jl</code></a><li><a href="#tabela_periódica_-_periodictablejl">Tabela Periódica - <code>PeriodicTable.jl</code></a></ol></div> <h2 id="animações_em_julia_com_o_javisjl"><a href="#animações_em_julia_com_o_javisjl">Animações em Julia com o <code>Javis.jl</code></a></h2> <p>Seguindo este tutorial passo a passo você obterá, ao final, a seguinte animação:</p> <div class=row ><div class=left ><img src="/assets/orbita3.gif" alt="" /></div> <div style="clear: both"></div></div> <p>Abaixo, apresentamos o código para a animação acima. Mas, antes de dar um <strong>Ctrl&#43;C</strong>, <strong>CtrL&#43;V</strong> para um ambiente Julia, como o Jupyter por exemplo, vamos entender os principais pontos do código?</p> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Javis
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/katex/katex.min.css"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/basic.css"> <link rel=icon  href="/assets/favicon.png"> <title>Blog</title> <header> <div class=blog-name ><a href="">Julia com Física</a></div> <nav> <ul> <li><a href="/">Apresentação</a> <li><a href="/menu1/">Notas</a> <li><a href="/menu2/">Blog</a> <li><a href="/menu3/">Errata</a> </ul> <img src="/assets/hamburger.svg" id=menu-icon > </nav> </header> <div class=franklin-content ><h1 id=blog ><a href="#blog">Blog</a></h1> <div class=franklin-toc ><ol><li><a href="#animações_em_julia_com_o_javisjl">Animações em Julia com o <code>Javis.jl</code></a><li><a href="#tabela_periódica_-_periodictablejl">Tabela Periódica - <code>PeriodicTable.jl</code></a></ol></div> <h2 id="animações_em_julia_com_o_javisjl"><a href="#animações_em_julia_com_o_javisjl">Animações em Julia com o <code>Javis.jl</code></a></h2> <p>Seguindo este tutorial passo a passo você obterá, ao final, a seguinte animação:</p> <div class=row ><div class=left ><img src="/assets/orbita_oficial1.gif" alt="" /></div> <div style="clear: both"></div></div> <p>Abaixo, apresentamos o código para a animação acima. Mas, antes de dar um <strong>Ctrl&#43;C</strong>, <strong>CtrL&#43;V</strong> para um ambiente Julia, como o Jupyter por exemplo, vamos entender os principais pontos do código?</p> <blockquote> <p><strong>Nota 1:</strong> Teste o código a seguir no REPL do Julia ou no Jupyter instalado em sua máquina. Não obtivemos êxito em ambientes <em>online</em>.</p> </blockquote> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Javis
 
 <span class=hljs-keyword >function</span> ground(args...)
-    background(<span class=hljs-string >&quot;black&quot;</span>) 
-    sethue(<span class=hljs-string >&quot;black&quot;</span>) 
+    background(<span class=hljs-string >&quot;black&quot;</span>) <span class=hljs-comment ># Cor de fundo da tela</span>
+    sethue(<span class=hljs-string >&quot;black&quot;</span>) <span class=hljs-comment ># cor da caneta</span>
 <span class=hljs-keyword >end</span>
 
-<span class=hljs-keyword >function</span> object(p=O, color=<span class=hljs-string >&quot;black&quot;</span>)
+<span class=hljs-keyword >function</span> object(p=O, color=<span class=hljs-string >&quot;black&quot;</span>, radius=<span class=hljs-number >1</span>)
     sethue(color)
-    circle(p, <span class=hljs-number >25</span>, :fill)
+    circle(p, radius, :fill)
     <span class=hljs-keyword >return</span> p
 <span class=hljs-keyword >end</span>
 
 <span class=hljs-keyword >function</span> path!(points, pos, color)
     sethue(color)
-    push!(points, pos) 
-    circle.(points, <span class=hljs-number >2</span>, :fill)
+    push!(points, pos) <span class=hljs-comment ># adiciona posição aos pontos.</span>
+    circle.(points, <span class=hljs-number >2</span>, :fill) <span class=hljs-comment ># desenha círculos para cada ponto usando broadcasting</span>
 <span class=hljs-keyword >end</span>
 
-myvideo = Video(<span class=hljs-number >700</span>, <span class=hljs-number >700</span>)
+meuvideo = Video(<span class=hljs-number >700</span>, <span class=hljs-number >700</span>)
 
-path_of_blue = Point[]
-path_of_gray = Point[]
+trajetoria_da_terra = Point[]
+trajetoria_da_lua = Point[]
 
 Background(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, ground)
-yellow_ball = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;yellow&quot;</span>), Point(<span class=hljs-number >0</span>,<span class=hljs-number >0</span>))
-blue_ball = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;blue&quot;</span>), Point(<span class=hljs-number >200</span>,<span class=hljs-number >0</span>))
-act!(blue_ball, Action(anim_rotate_around(<span class=hljs-number >2</span><span class=hljs-literal >π</span>, O)))
-gray_ball = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;gray&quot;</span>), Point(<span class=hljs-number >150</span>,<span class=hljs-number >30</span>))
-act!(gray_ball, Action(anim_rotate_around(<span class=hljs-number >24</span><span class=hljs-literal >π</span>, blue_ball)))
-Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(path_of_blue, pos(blue_ball), <span class=hljs-string >&quot;blue&quot;</span>))
-Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(path_of_gray, pos(gray_ball), <span class=hljs-string >&quot;gray&quot;</span>))
+sol = Object((args...)-&gt;object(O, <span class=hljs-string >&quot;yellow&quot;</span>,<span class=hljs-number >35</span>), Point(<span class=hljs-number >0</span>,<span class=hljs-number >0</span>))
+terra = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;blue&quot;</span>,<span class=hljs-number >15</span>), Point(<span class=hljs-number >200</span>,<span class=hljs-number >0</span>))
+act!(terra, Action(anim_rotate_around(<span class=hljs-number >2</span><span class=hljs-literal >π</span>, O)))
+lua = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;gray&quot;</span>,<span class=hljs-number >5</span>), Point(<span class=hljs-number >150</span>,<span class=hljs-number >30</span>))
+act!(lua, Action(anim_rotate_around(<span class=hljs-number >24</span><span class=hljs-literal >π</span>, terra)))
+Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(trajetoria_da_terra, pos(terra), <span class=hljs-string >&quot;blue&quot;</span>))
+Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(trajetoria_da_lua, pos(lua), <span class=hljs-string >&quot;gray&quot;</span>))
 
-render(myvideo; pathname=<span class=hljs-string >&quot;orbitas.gif&quot;</span>)</code></pre> <p>Então, bora lá&#33;</p> <p>O primeiro passo é fazer a instalação do pacote<sup id="fnref:1"><a href="#fndef:1" class=fnref >[1]</a></sup> <code>Javis.jl</code>. Se você estiver usando o Jupyter insira os comandos:</p> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Pkg
-Pkg.add(<span class=hljs-string >&quot;Javis&quot;</span>)</code></pre> <blockquote> <p><strong>Nota 1:</strong> Este passo não consta no código acima. Ele será necessário apenas na primeira vez que você for usar o pacote em seu computador.</p> </blockquote> <p>Após a instalação precisamos carregar o pacote para o nosso código. Para isso, digite o comando abaixo:</p> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Javis</code></pre>
+render(meuvideo; pathname=<span class=hljs-string >&quot;orbita_oficial1.gif&quot;</span>)</code></pre> <p>Então, bora lá&#33;</p> <p>O primeiro passo é fazer a instalação do pacote<sup id="fnref:1"><a href="#fndef:1" class=fnref >[1]</a></sup> <code>Javis.jl</code>. Se você estiver usando o Jupyter insira os comandos:</p> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Pkg
+Pkg.add(<span class=hljs-string >&quot;Javis&quot;</span>)</code></pre> <blockquote> <p><strong>Nota 2:</strong> Este passo não consta no código acima. Ele será necessário apenas na primeira vez que você for usar o pacote em seu computador.</p> </blockquote> <p>Após a instalação precisamos carregar o pacote para o nosso código. Para isso, digite o comando abaixo:</p> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Javis</code></pre>
 <p>Pronto&#33; Com o pacote instalado e devidamente carregado, podemos iniciar a construção da nossa animação.</p>
 <p>Nossa primeira tarefa na construção da animação é definir a função<sup id="fnref:2"><a href="#fndef:2" class=fnref >[2]</a></sup> <code>ground</code>. Ela definirá o fundo da animação &#40;<em>background</em>&#41; e a cor da &quot;caneta&quot; &#40;<em>pen</em>&#41; como preto. Observe o código abaixo:</p>
 <pre><code class="julia hljs"><span class=hljs-keyword >function</span> ground(args...)
@@ -41,13 +41,13 @@ Pkg.add(<span class=hljs-string >&quot;Javis&quot;</span>)</code></pre> <blockqu
 <span class=hljs-keyword >end</span></code></pre>
 <p>Você pode estar se perguntado porque <code>args...</code>  na primeira linha. Vamos te explicar. Cada função definida pelo usuário recebe três argumentos: <code>video</code> &#40;estrutura do vídeo&#41;, <code>object</code> &#40;estrutura do objeto&#41; e <code>frame</code> &#40;o número de quadros atuais&#41; fornecidos pelo <code>Javis.jl</code>.<br/></p>
 <p>Embora esses argumentos sejam irrelevantes para a função <code>ground</code>, precisamos escrever <code>args...</code>para que Julia saiba que temos uma função que aceita esses três argumentos. Quanto ao <code>...</code> significa basicamente quantos argumentos você quiser.<br/></p>
-<p>A seguir criamos a função <code>object</code>, ela define uma cor para os círculos e os desenha adequadamente. Veja o código abaixo:</p>
-<pre><code class="julia hljs"><span class=hljs-keyword >function</span> object(p=O, color=<span class=hljs-string >&quot;black&quot;</span>)
+<p>A seguir criamos a função <code>object</code>, ela define uma cor para os círculos, um raio padrão de tamanho 1 e os desenha adequadamente. Veja o código abaixo:</p>
+<pre><code class="julia hljs"><span class=hljs-keyword >function</span> object(p=O, color=<span class=hljs-string >&quot;black&quot;</span>, radius=<span class=hljs-number >1</span>)
     sethue(color)
-    circle(p, <span class=hljs-number >25</span>, :fill)
+    circle(p, radius, :fill)
     <span class=hljs-keyword >return</span> p
 <span class=hljs-keyword >end</span></code></pre>
-<p>Na função acima <code>25</code> é o raio da bola, tente modificá-lo para ver o que acontece e <code>:fill</code> preenche a bola com a cor que definirmos.<br/></p>
+<p>Na função acima <code>radius</code> é o raio da bola,em nossa simulação criaremos 3 bolas de raios de tamanhos diferentes e <code>:fill</code> preenche a bola com a cor que definirmos.<br/></p>
 <p>A última função que criaremos em nosso código é a função <code>path&#33;</code>. Ela desenha a trajetória das bolas. Veja o código abaixo:</p>
 <pre><code class="julia hljs"><span class=hljs-keyword >function</span> path!(points, pos, color)
     sethue(color)
@@ -55,37 +55,38 @@ Pkg.add(<span class=hljs-string >&quot;Javis&quot;</span>)</code></pre> <blockqu
     circle.(points, <span class=hljs-number >2</span>, :fill) <span class=hljs-comment ># desenha círculos para cada ponto usando broadcasting</span>
 <span class=hljs-keyword >end</span></code></pre>
 <blockquote>
-<p><strong>Nota 2:</strong> O <code>pos</code> assume a <strong>pos</strong>ição de uma determinada bola e passa-o como argumento para a função <code>path&#33;</code>.</p>
+<p><strong>Nota 3:</strong> O <code>pos</code> assume a <strong>pos</strong>ição de uma determinada bola e passa-o como argumento para a função <code>path&#33;</code>.</p>
 </blockquote>
 <blockquote>
-<p><strong>Nota 3:</strong> O conceito de broadcasting está descrito em detalhes no capítulo 7 do livro <code>Julia com Física: Uma Introdução</code>.</p>
+<p><strong>Nota 4:</strong> O conceito de broadcasting está descrito em detalhes no capítulo 7 do livro <code>Julia com Física: Uma Introdução</code>.</p>
 </blockquote>
-<p>A seguir criamos a variável <code>myvideo</code> e atribuímos a ela um <code>video</code>, ele define a tela de vídeo para a animação. Aqui nossa tea possui 700 pixels de largura por 700 pixels de altura. </p>
+<p>A seguir criamos a variável <code>meuvideo</code> e atribuímos a ela um <code>video</code>, ele define a tela de vídeo para a animação. Aqui nossa tela possui 700 pixels de largura por 700 pixels de altura. </p>
 <pre><code class="julia hljs">myvideo = Video(<span class=hljs-number >700</span>, <span class=hljs-number >700</span>) <span class=hljs-comment ># 700 x 700 (largura x altura)</span></code></pre>
-<p>Cada objeto ou ação que criamos durante o código é adicionado ao <code>myvideo</code>.</p>
-<p>A seguir criamos duas variáveis <code>path_of_blue</code> e <code>path_of_gray</code> que armazenarão em um vetor <sup id="fnref:3"><a href="#fndef:3" class=fnref >[3]</a></sup> os pontos da trajetória das bolas azul e cinza. </p>
-<pre><code class="julia hljs">path_of_blue = Point[]
-path_of_gray = Point[]</code></pre>
+<p>Cada objeto ou ação que criamos durante o código é adicionado ao <code>meuvideo</code>.</p>
+<p>A seguir criamos duas variáveis <code>trajetoria_da_terra</code> e <code>trajetoria_da_lua</code> que armazenarão em um vetor <sup id="fnref:3"><a href="#fndef:3" class=fnref >[3]</a></sup> os pontos da trajetória das bolas azul e cinza. </p>
+<pre><code class="julia hljs">trajetoria_da_terra = Point[]
+trajetoria_da_lua = Point[]</code></pre>
 <p>Logo após,  usamos <code>Background</code> para especificar que a função <code>ground</code> será aplicada a todos os objetos descritos posteriormente.</p>
 <pre><code class="julia hljs">Background(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, ground)</code></pre>
-<p>o valor <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>:</mo><mn>500</mn></mrow><annotation encoding="application/x-tex">1:500</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >1</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >:</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >5</span><span class=mord >0</span><span class=mord >0</span></span></span></span>, se refere a cada quadro da animação de 1 a 500 e está relacionado também a veocidade da animação. Varie o valor 500 para mais e para menos para ver o que acontece. <em>Vamos dar spoiler: Quando diminuímos a taxa para, por exemplo, 1:200 a animação fica mais rápida</em>. </p>
-<p>Abaixo descrevemos o código para a <code>yellow_ball</code>. Ela representa o Sol e estará localizada no centro da animação e não possuirá movimento.</p>
-<pre><code class="julia hljs">yellow_ball = Object((args...)-&gt;object(O, <span class=hljs-string >&quot;yellow&quot;</span>), Point(<span class=hljs-number >0</span>,<span class=hljs-number >0</span>))</code></pre>
-<p>Posteriormente definimos o objeto <code>blue_ball</code>, que representará o planeta Terra em nossa animação.</p>
-<pre><code class="julia hljs">blue_ball = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;blue&quot;</span>), Point(<span class=hljs-number >200</span>,<span class=hljs-number >0</span>))
-act!(blue_ball, Action(anim_rotate_around(<span class=hljs-number >2</span><span class=hljs-literal >π</span>, O)))</code></pre>
-<p>Perceba que a cor e a posição da bola <code>blue_ball</code> são definidos na função anônima <sup id="fnref:4"><a href="#fndef:4" class=fnref >[4]</a></sup> <code>&#40;args...&#41;-&gt;object&#40;O, &quot;blue&quot;&#41;, Point&#40;200,0&#41;&#41;</code>. Onde <code>Point&#40;200,0&#41;</code> significa que <code>blue_ball</code> estará localizada à 200 pixels da origem na direção x.<br/></p>
-<p>Logo abaixo de <code>blue_ball</code> aparece pela primeira vez o método <code>act&#33;</code>. </p>
-<p>O trecho de código<code>act&#33;&#40;blue_ball, Action&#40;anim_rotate_around&#40;2π, O&#41;&#41;&#41;</code> fará com que <code>blue_ball</code>gire em um ângulo de <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">2π</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >2</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span> em torno do centro da animação.</p>
-<p>Abaixo definimos o <code>gray_ball</code>, ela representará a Lua em nossa simulação.</p>
-<pre><code class="julia hljs">gray_ball = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;gray&quot;</span>), Point(<span class=hljs-number >150</span>,<span class=hljs-number >30</span>))
-act!(gray_ball, Action(anim_rotate_around(<span class=hljs-number >24</span><span class=hljs-literal >π</span>, blue_ball)))</code></pre>
-<p>Perceba que assim como ocorreu com <code>blue_ball</code> a cor e a posição de <code>gray_ball</code> também são definidos na função anônima <code>&#40;args...&#41;-&gt;object&#40;O, &quot;gray&quot;&#41;, Point&#40;150,30&#41;&#41;</code>. Onde <code>Point&#40;150,30&#41;</code> significa que <code>gray_ball</code> estará localizada à 150 pixels da origem na direção x e 30 pixels da origem na direção y.<br/></p>
-<p>O trecho de código <code>act&#33;&#40;gray_ball, Action&#40;anim_rotate_around&#40;24π, blue_ball&#41;&#41;&#41;</code> diz que <code>gray_ball</code> irá girar em um ângulo de <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>24</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">24π</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >2</span><span class=mord >4</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span> em torno de <code>blue_ball</code>. Isso fará com que nossa Lua descreva uma espécie de espiral para contornar a Terra. Tente modificar esse valor para ver o que acontece.</p>
-<p>A seguir vemos que os objetos <code>path_of_blue</code>e <code>path_of_gray</code>&#40;caminho de <code>blue_ball</code> e caminho de<code>gray_ball</code>&#41; são definidos nas funções anônimas <code>&#40;args...&#41;-&gt;path&#33;&#40;path_of_blue, pos&#40;blue_ball&#41;, &quot;blue&quot;&#41;</code> e <code>&#40;args...&#41;-&gt;path&#33;&#40;path_of_gray, pos&#40;gray_ball&#41;, &quot;gray&quot;&#41;</code> respectivamente. Isso desenhará a trajetória de <code>blue_ball</code> e de <code>gray_ball</code>.</p>
-<pre><code class="julia hljs">Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(path_of_blue, pos(blue_ball), <span class=hljs-string >&quot;blue&quot;</span>))
-Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(path_of_gray, pos(gray_ball), <span class=hljs-string >&quot;gray&quot;</span>))</code></pre>
-<p>Faça um teste. Apague ou comente &#40;basta colocar # antes do código&#41; a função <code>path&#33;</code>. Faça o mesmo com  estas duas linhas acima para ver o que acontece. <em>Spoiler: O desenho da trajetória em nossa simulação desaparecerá.</em> Vá em frente e teste&#33;</p>
+<p>o valor <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>:</mo><mn>500</mn></mrow><annotation encoding="application/x-tex">1:500</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >1</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >:</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >5</span><span class=mord >0</span><span class=mord >0</span></span></span></span>, se refere a quantidade de quadro da animação de 1 a 500 e está relacionado também a veocidade da animação. Varie o valor 500 para mais e para menos para ver o que acontece. <em>Vamos dar spoiler: Quando diminuímos a taxa para, por exemplo, 1:200 a animação fica mais rápida</em>. </p>
+<p>Abaixo descrevemos o código para a variável <code>sol</code>. Ela representa o Sol e estará localizada no centro da animação e não possuirá movimento.</p>
+<pre><code class="julia hljs">sol = Object((args...)-&gt;object(O, <span class=hljs-string >&quot;yellow&quot;</span>,<span class=hljs-number >35</span>), Point(<span class=hljs-number >0</span>,<span class=hljs-number >0</span>))</code></pre>
+<p>Nosso objeto <code>sol</code>terá cor amarela e radio de valor <code>35</code>no trecho de código acima se refere ao raio do SOl.<br/></p>
+<p>Posteriormente definimos o objeto <code>terra</code>, que representará o planeta Terra em nossa animação.</p>
+<pre><code class="julia hljs">terra = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;blue&quot;</span>,<span class=hljs-number >15</span>), Point(<span class=hljs-number >200</span>,<span class=hljs-number >0</span>))
+act!(terra, Action(anim_rotate_around(<span class=hljs-number >2</span><span class=hljs-literal >π</span>, O)))</code></pre>
+<p>Perceba que a cor e a posição da variável <code>terra</code> são definidos na função anônima <sup id="fnref:4"><a href="#fndef:4" class=fnref >[4]</a></sup> <code>&#40;args...&#41;-&gt;object&#40;O, &quot;blue&quot;,15&#41;, Point&#40;200,0&#41;&#41;</code>.O valor´<code>15</code>se refere ao raio da <code>terra</code> e <code>Point&#40;200,0&#41;</code> significa que <code>terra</code> estará localizada à 200 pixels da origem na direção x.<br/></p>
+<p>Logo abaixo de <code>terra</code> aparece pela primeira vez o método <code>act&#33;</code>. </p>
+<p>O trecho de código<code>act&#33;&#40;terra, Action&#40;anim_rotate_around&#40;2π, O&#41;&#41;&#41;</code> fará com que <code>terra</code>gire em um ângulo de <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">2π</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >2</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span> em torno do centro da animação.</p>
+<p>Abaixo definimos o <code>lua</code>, ela representará a Lua em nossa simulação.</p>
+<pre><code class="julia hljs">lua = Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;object(O, <span class=hljs-string >&quot;gray&quot;</span>,<span class=hljs-number >5</span>), Point(<span class=hljs-number >150</span>,<span class=hljs-number >30</span>))
+act!(lua, Action(anim_rotate_around(<span class=hljs-number >24</span><span class=hljs-literal >π</span>, terra)))</code></pre>
+<p>Perceba que assim como ocorreu com <code>terra</code> a cor e a posição da <code>lua</code> também são definidos na função anônima <code>&#40;args...&#41;-&gt;object&#40;O, &quot;gray&quot;,5&#41;, Point&#40;150,30&#41;&#41;</code>. Onde o valor <code>5</code> se refere ao raio da lua e <code>Point&#40;150,30&#41;</code> significa que a <code>lua</code> estará localizada à 150 pixels da origem na direção x e 30 pixels da origem na direção y.<br/></p>
+<p>O trecho de código <code>act&#33;&#40;lua, Action&#40;anim_rotate_around&#40;24π, terra&#41;&#41;&#41;</code> diz que <code>lua</code> irá girar em um ângulo de <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>24</mn><mi>π</mi></mrow><annotation encoding="application/x-tex">24π</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >2</span><span class=mord >4</span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span> em torno da <code>terra</code>. Isso fará com que nossa Lua descreva uma espécie de espiral para contornar a Terra. Tente modificar esse valor para ver o que acontece.</p>
+<p>A seguir vemos que os objetos <code>trajetoria_da_terra</code>e <code>trajetoria_da_lua</code>&#40;caminho da <code>terra</code> e caminho de<code>lua</code>&#41; são definidos nas funções anônimas <code>&#40;args...&#41;-&gt;path&#33;&#40;trajetoria_da_terra, pos&#40;terra&#41;, &quot;blue&quot;&#41;</code> e <code>&#40;args...&#41;-&gt;path&#33;&#40;trajetoria_da_lua, pos&#40;lua&#41;, &quot;gray&quot;&#41;</code> respectivamente. Isso desenhará a trajetória da <code>terra</code> e da <code>lua</code>.</p>
+<pre><code class="julia hljs">Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(trajetoria_da_terra, pos(terra), <span class=hljs-string >&quot;blue&quot;</span>))
+Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (args...)-&gt;path!(trajetoria_da_lua, pos(lua), <span class=hljs-string >&quot;gray&quot;</span>))</code></pre>
+<p>Faça um teste&#33; Apague ou comente a função <code>path&#33;</code> e estas duas linhas acima para ver o que acontece. <em>Spoiler: Não haverá mais o desenho da trajetória em nossa simulação.</em> Va em frente e teste&#33;</p>
 <p>Finalmnte, o comando <code>render</code>, renderiza todos os objetos definidos no <code>video</code> que definimos como <code>myvideo</code> e o produz como um arquivo <code>gif</code>.</p>
 <pre><code class="julia hljs">render(myvideo; pathname=<span class=hljs-string >&quot;orbitas.gif&quot;</span>)</code></pre>
 <p>Agora sim, copie e cole o código em um ambiente Julia e o modifique quantas vezes quiser e aprecie o resultados.</p>
@@ -115,10 +116,6 @@ Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (a
 </table>
 </p>
 <ul>
-<li><p><strong>Autores:</strong> Adeil Araújo, Meirivâni Meneses</p>
-
-<li><p><strong>Data:</strong> 28.nov.2020</p>
-
 <li><p><strong>O pacote foi desenvolvido por:</strong></p>
 
 </ul>
@@ -207,7 +204,7 @@ e⁻-configuration: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5
 <p>&#91;4&#93; <a href="https://github.com/JuliaPhysics/PeriodicTable.jl">JuliaPhysics - PeriodicTable.jl</a></p>
 <div class=page-foot >
   <div class=copyright >
-    &copy; Meneses&Araújo. Last modified: November 29, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+    &copy; Meneses&Araújo. Last modified: December 06, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
   </div>
 </div>
 </div>
