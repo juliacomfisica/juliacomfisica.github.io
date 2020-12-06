@@ -126,15 +126,15 @@ Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (a
 </ul>
 <p>&#91;1&#93; <a href="https://wikunia.github.io/Javis.jl/stable/">Javis.Jl</a></p>
 <h2 id=notebook_plutojl ><a href="#notebook_plutojl"><em>Notebook</em> <code>Pluto.jl</code></a></h2>
-<p>Uma opção ao <em>notebook</em> Jupyter é o <em>notebook</em> <code>Pluto.jl</code> ele é inscrito em Julia puro, fácil de instalar e é reativo, ou seja, ao alterar uma função ou variável ele atualiza automaticamente todas as células afetadas por essa alteração.</p>
+<p>Uma opção ao <em>notebook</em> Jupyter é o <em>notebook</em> <code>Pluto.jl</code>. Ele foi escrito em Julia puro e é super fácil de instalar, além de ser reativo, ou seja, ao alterar uma função ou variável ele atualiza automaticamente todas as células afetadas por essa alteração.</p>
 <blockquote>
-<p><strong>Nota 1:</strong> Para utilizar o <code>Pluto.jl</code>você vai precisar de:</p>
+<p><strong>Nota 1:</strong> Para utilizar o <code>Pluto.jl</code>você vai precisar:</p>
 <ol>
-<li><p>Ter instalado o Julia instalado em seu computador. Dê preferência a v1.5 ela é a mais rápida;</p>
+<li><p>ter instalado o Julia em seu computador. De preferência a versão v1.5, po ser mais rápida;</p>
 
-<li><p>Ter em seu computador o sistema operacional Linux, macOS ou Windows. No <em>Linux e macOS</em> o <code>Pluto.Jl</code>funcionará melhor;</p>
+<li><p>ter em seu computador o sistema operacional Linux, macOS ou Windows. No <em>Linux e macOS</em> o <code>Pluto.Jl</code>funcionará melhor;</p>
 
-<li><p>E finalmente ter o navegador Mozilla <strong>Firefox</strong> ou Google <strong>Chrome</strong> instalado, certifique-se de obter a versão mais recente.</p>
+<li><p>ter instalado o navegador Mozilla <strong>Firefox</strong> ou Google <strong>Chrome</strong>. Certifique-se de obter a versão mais recente.</p>
 
 </ol>
 </blockquote>
@@ -151,12 +151,12 @@ Object(<span class=hljs-number >1</span>:<span class=hljs-number >500</span>, (a
 <pre><code class="julia hljs">julia&gt; ]
 (v1<span class=hljs-number >.5</span>) pkg&gt; add Pluto</code></pre>
 <p><em>A instalação demorará alguns minutos.</em><br/></p>
-<p>Essa instalação é necessária uma única vez. Porém, Sempre que for utilizar o <code>Pluto.jl</code> você deve digitar</p>
+<p>Essa instalação é necessária uma única vez, no entanto, sempre que for utilizar o <code>Pluto.jl</code> você deverá digitar:</p>
 <pre><code class="julia hljs">julia&gt; <span class=hljs-keyword >import</span> Pluto
 julia&gt; Pluto.run()</code></pre>
-<p>Pronto&#33; O <code>Pluto.jl</code> será aberto no seu navegador e agora lhe resta começar.</p>
+<p>Pronto&#33; O <code>Pluto.jl</code> será aberto no seu navegador e agora só lhe resta começar.</p>
 <ul>
-<li><p><strong>Exemplo de uso do <code>Pluto.jl</code>com o pacote <code>Plots.jl</code><sup id="fnref:6"><a href="#fndef:6" class=fnref >[6]</a></sup></strong></p>
+<li><p><strong>Exemplo do uso do <code>Pluto.jl</code>com o pacote <code>Plots.jl</code><sup id="fnref:6"><a href="#fndef:6" class=fnref >[6]</a></sup></strong></p>
 
 </ul>
 <p>Imagine que você esteja analisando um sistema massa-mola que realiza um movimento harmônico simples &#40;MHS&#41; descrito pelas seguintes funções:</p>
@@ -169,11 +169,7 @@ julia&gt; Pluto.run()</code></pre>
 <span class=katex-display ><span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML" display=block ><semantics><mrow><mi>α</mi><mo>=</mo><mo>−</mo><mn>0.8</mn><mo>⋅</mo><mi>c</mi><mi>o</mi><mi>s</mi><mo stretchy=false >(</mo><mn>2</mn><mo>⋅</mo><mi>t</mi><mo>+</mo><mi>π</mi><mo stretchy=false >)</mo></mrow><annotation encoding="application/x-tex">
 \alpha=-0.8 \cdot cos(2 \cdot t+ \pi )
 </annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.72777em;vertical-align:-0.08333em;"></span><span class=mord >−</span><span class=mord >0</span><span class=mord >.</span><span class=mord >8</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">c</span><span class="mord mathnormal">o</span><span class="mord mathnormal">s</span><span class=mopen >(</span><span class=mord >2</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >⋅</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:0.69841em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">t</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >+</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class=mclose >)</span></span></span></span></span>
-<p>Suponha que queremos obter os gráficos desse movimento. Como devemos proceder? O primeiro passo é digitar o código abaixo:</p>
-<div class=row ><div class=left ><img src="/assets/pluto1.png" alt="" /></div>
-
-<div style="clear: both"></div></div>
-<p>Copie e cole no <code>Pluto.jl</code>o código abaixo. Va lá&#33; eu já digitei por você. Teste&#33;</p>
+<p>Para obter os gráficos desse movimento, você precisa digitar o seguinte código:</p>
 <pre><code class="julia hljs"><span class=hljs-keyword >begin</span>
   <span class=hljs-keyword >import</span> Pkg
   Pkg.activate(mktempdir())
@@ -188,10 +184,7 @@ julia&gt; Pluto.run()</code></pre>
 </ol>
 </blockquote>
 <p>Essa ação é necessária para configurarmos um ambiente de pacote limpo.</p>
-<p>Em seguida, adicionamos o pacote Plots ao nosso ambiente, o importamos e finalmente escolhemos o <em>backend plotly</em>.</p>
-<div class=row ><div class=left ><img src="/assets/pluto2.png" alt="" /></div>
-
-<div style="clear: both"></div></div>
+<p>Em seguida, adicione o pacote Plots ao ambiente, importe e finalmente escolha o <em>backend plotly</em>.</p>
 <p>Novamente, faça CRTL&#43;C, CRTL&#43;V do código abaixo no <code>Pluto.jl</code>.</p>
 <pre><code class="julia hljs"><span class=hljs-keyword >begin</span>
   Pkg.add(<span class=hljs-string >&quot;Plots&quot;</span>)
