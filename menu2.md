@@ -16,7 +16,7 @@
 Seguindo este tutorial passo a passo você obterá, ao final, a seguinte animação:
 
 @@row
-@@left ![](/assets/orbita3.gif) @@
+@@left ![](/assets/orbita_oficial1.gif) @@
 ~~~
 <div style="clear: both"></div>
 ~~~
@@ -24,41 +24,43 @@ Seguindo este tutorial passo a passo você obterá, ao final, a seguinte animaç
 
 Abaixo, apresentamos o código para a animação acima. Mas, antes de dar um **Ctrl+C**, **CtrL+V** para um ambiente Julia, como o Jupyter por exemplo, vamos entender os principais pontos do código?
 
+> **Nota 1:** Teste o código a seguir no REPL do Julia ou no Jupyter instalado em sua máquina. Não obtivemos êxito em ambientes _online_.
+
 ```
 using Javis
 
 function ground(args...)
-    background("black") 
-    sethue("black") 
+    background("black") # Cor de fundo da tela
+    sethue("black") # cor da caneta
 end
 
-function object(p=O, color="black")
+function object(p=O, color="black", radius=1)
     sethue(color)
-    circle(p, 25, :fill)
+    circle(p, radius, :fill)
     return p
 end
 
 function path!(points, pos, color)
     sethue(color)
-    push!(points, pos) 
-    circle.(points, 2, :fill)
+    push!(points, pos) # adiciona posição aos pontos.
+    circle.(points, 2, :fill) # desenha círculos para cada ponto usando broadcasting
 end
 
-myvideo = Video(700, 700)
+meuvideo = Video(700, 700)
 
-path_of_blue = Point[]
-path_of_gray = Point[]
+trajetoria_da_terra = Point[]
+trajetoria_da_lua = Point[]
 
 Background(1:500, ground)
-yellow_ball = Object(1:500, (args...)->object(O, "yellow"), Point(0,0))
-blue_ball = Object(1:500, (args...)->object(O, "blue"), Point(200,0))
-act!(blue_ball, Action(anim_rotate_around(2π, O)))
-gray_ball = Object(1:500, (args...)->object(O, "gray"), Point(150,30))
-act!(gray_ball, Action(anim_rotate_around(24π, blue_ball)))
-Object(1:500, (args...)->path!(path_of_blue, pos(blue_ball), "blue"))
-Object(1:500, (args...)->path!(path_of_gray, pos(gray_ball), "gray"))
+sol = Object((args...)->object(O, "yellow",35), Point(0,0))
+terra = Object(1:500, (args...)->object(O, "blue",15), Point(200,0))
+act!(terra, Action(anim_rotate_around(2π, O)))
+lua = Object(1:500, (args...)->object(O, "gray",5), Point(150,30))
+act!(lua, Action(anim_rotate_around(24π, terra)))
+Object(1:500, (args...)->path!(trajetoria_da_terra, pos(terra), "blue"))
+Object(1:500, (args...)->path!(trajetoria_da_lua, pos(lua), "gray"))
 
-render(myvideo; pathname="orbitas.gif")
+render(meuvideo; pathname="orbita_oficial1.gif")
 ```
 Então, bora lá!
  
@@ -68,7 +70,7 @@ Então, bora lá!
 using Pkg
 Pkg.add("Javis")
 ```
-> **Nota 1:** Este passo não consta no código acima. Ele será necessário apenas na primeira vez que você for usar o pacote em seu computador.
+> **Nota 2:** Este passo não consta no código acima. Ele será necessário apenas na primeira vez que você for usar o pacote em seu computador.
 
 Após a instalação precisamos carregar o pacote para o nosso código. Para isso, digite o comando abaixo:
 
@@ -89,16 +91,16 @@ Você pode estar se perguntado porque `args...`  na primeira linha. Vamos te exp
 
 Embora esses argumentos sejam irrelevantes para a função `ground`, precisamos escrever `args...`para que Julia saiba que temos uma função que aceita esses três argumentos. Quanto ao `...` significa basicamente quantos argumentos você quiser.\\
 
-A seguir criamos a função `object`, ela define uma cor para os círculos e os desenha adequadamente. Veja o código abaixo:
+A seguir criamos a função `object`, ela define uma cor para os círculos, um raio padrão de tamanho 1 e os desenha adequadamente. Veja o código abaixo:
 
 ```
-function object(p=O, color="black")
+function object(p=O, color="black", radius=1)
     sethue(color)
-    circle(p, 25, :fill)
+    circle(p, radius, :fill)
     return p
 end
 ```
-Na função acima `25` é o raio da bola, tente modificá-lo para ver o que acontece e `:fill` preenche a bola com a cor que definirmos.\\
+Na função acima `radius` é o raio da bola,em nossa simulação criaremos 3 bolas de raios de tamanhos diferentes e `:fill` preenche a bola com a cor que definirmos.\\
 
 A última função que criaremos em nosso código é a função `path!`. Ela desenha a trajetória das bolas. Veja o código abaixo:
 
@@ -109,64 +111,66 @@ function path!(points, pos, color)
     circle.(points, 2, :fill) # desenha círculos para cada ponto usando broadcasting
 end
 ```
-> **Nota 2:** O `pos` assume a **pos**ição de uma determinada bola e passa-o como argumento para a função `path!`.
+> **Nota 3:** O `pos` assume a **pos**ição de uma determinada bola e passa-o como argumento para a função `path!`.
 
-> **Nota 3:** O conceito de broadcasting está descrito em detalhes no capítulo 7 do livro `Julia com Física: Uma Introdução`.
+> **Nota 4:** O conceito de broadcasting está descrito em detalhes no capítulo 7 do livro `Julia com Física: Uma Introdução`.
 
-A seguir criamos a variável `myvideo` e atribuímos a ela um `video`, ele define a tela de vídeo para a animação. Aqui nossa tea possui 700 pixels de largura por 700 pixels de altura. 
+A seguir criamos a variável `meuvideo` e atribuímos a ela um `video`, ele define a tela de vídeo para a animação. Aqui nossa tela possui 700 pixels de largura por 700 pixels de altura. 
 
 ```
 myvideo = Video(700, 700) # 700 x 700 (largura x altura)
 
 ```
-Cada objeto ou ação que criamos durante o código é adicionado ao `myvideo`.
+Cada objeto ou ação que criamos durante o código é adicionado ao `meuvideo`.
 
 
-A seguir criamos duas variáveis `path_of_blue` e `path_of_gray` que armazenarão em um vetor [^3] os pontos da trajetória das bolas azul e cinza. 
+A seguir criamos duas variáveis `trajetoria_da_terra` e `trajetoria_da_lua` que armazenarão em um vetor [^3] os pontos da trajetória das bolas azul e cinza. 
 
 ```
-path_of_blue = Point[]
-path_of_gray = Point[]
+trajetoria_da_terra = Point[]
+trajetoria_da_lua = Point[]
 ```
 Logo após,  usamos `Background` para especificar que a função `ground` será aplicada a todos os objetos descritos posteriormente.
 ```
 Background(1:500, ground)
 ```
-o valor $1:500$, se refere a cada quadro da animação de 1 a 500 e está relacionado também a veocidade da animação. Varie o valor 500 para mais e para menos para ver o que acontece. _Vamos dar spoiler: Quando diminuímos a taxa para, por exemplo, 1:200 a animação fica mais rápida_. 
+o valor $1:500$, se refere a quantidade de quadro da animação de 1 a 500 e está relacionado também a veocidade da animação. Varie o valor 500 para mais e para menos para ver o que acontece. _Vamos dar spoiler: Quando diminuímos a taxa para, por exemplo, 1:200 a animação fica mais rápida_. 
 
-Abaixo descrevemos o código para a `yellow_ball`. Ela representa o Sol e estará localizada no centro da animação e não possuirá movimento.
-
-```
-yellow_ball = Object((args...)->object(O, "yellow"), Point(0,0))
-```
-Posteriormente definimos o objeto `blue_ball`, que representará o planeta Terra em nossa animação.
+Abaixo descrevemos o código para a variável `sol`. Ela representa o Sol e estará localizada no centro da animação e não possuirá movimento.
 
 ```
-blue_ball = Object(1:500, (args...)->object(O, "blue"), Point(200,0))
-act!(blue_ball, Action(anim_rotate_around(2π, O)))
+sol = Object((args...)->object(O, "yellow",35), Point(0,0))
 ```
-Perceba que a cor e a posição da bola `blue_ball` são definidos na função anônima [^4] `(args...)->object(O, "blue"), Point(200,0))`. Onde `Point(200,0)` significa que `blue_ball` estará localizada à 200 pixels da origem na direção x.\\
+Nosso objeto `sol`terá cor amarela e radio de valor `35`no trecho de código acima se refere ao raio do SOl.\\
 
-Logo abaixo de `blue_ball` aparece pela primeira vez o método `act!`. 
-
-O trecho de código`act!(blue_ball, Action(anim_rotate_around(2π, O)))` fará com que `blue_ball`gire em um ângulo de $2π$ em torno do centro da animação.
-
-Abaixo definimos o `gray_ball`, ela representará a Lua em nossa simulação.
+Posteriormente definimos o objeto `terra`, que representará o planeta Terra em nossa animação.
 
 ```
-gray_ball = Object(1:500, (args...)->object(O, "gray"), Point(150,30))
-act!(gray_ball, Action(anim_rotate_around(24π, blue_ball)))
+terra = Object(1:500, (args...)->object(O, "blue",15), Point(200,0))
+act!(terra, Action(anim_rotate_around(2π, O)))
 ```
-Perceba que assim como ocorreu com `blue_ball` a cor e a posição de `gray_ball` também são definidos na função anônima `(args...)->object(O, "gray"), Point(150,30))`. Onde  `Point(150,30)` significa que `gray_ball` estará localizada à 150 pixels da origem na direção x e 30 pixels da origem na direção y.\\
+Perceba que a cor e a posição da variável `terra` são definidos na função anônima [^4] `(args...)->object(O, "blue",15), Point(200,0))`.O valor´`15`se refere ao raio da `terra` e `Point(200,0)` significa que `terra` estará localizada à 200 pixels da origem na direção x.\\
 
-O trecho de código `act!(gray_ball, Action(anim_rotate_around(24π, blue_ball)))` diz que `gray_ball` irá girar em um ângulo de  $24π$ em torno de `blue_ball`. Isso fará com que nossa Lua descreva uma espécie de espiral para contornar a Terra. Tente modificar esse valor para ver o que acontece.
+Logo abaixo de `terra` aparece pela primeira vez o método `act!`. 
 
-A seguir vemos que os objetos `path_of_blue`e `path_of_gray`(caminho de `blue_ball` e caminho de`gray_ball`) são definidos nas funções anônimas `(args...)->path!(path_of_blue, pos(blue_ball), "blue")` e `(args...)->path!(path_of_gray, pos(gray_ball), "gray")` respectivamente. Isso desenhará a trajetória de `blue_ball` e de `gray_ball`.
+O trecho de código`act!(terra, Action(anim_rotate_around(2π, O)))` fará com que `terra`gire em um ângulo de $2π$ em torno do centro da animação.
+
+Abaixo definimos o `lua`, ela representará a Lua em nossa simulação.
+
 ```
-Object(1:500, (args...)->path!(path_of_blue, pos(blue_ball), "blue"))
-Object(1:500, (args...)->path!(path_of_gray, pos(gray_ball), "gray"))
+lua = Object(1:500, (args...)->object(O, "gray",5), Point(150,30))
+act!(lua, Action(anim_rotate_around(24π, terra)))
 ```
-Faça um teste. Apague ou comente (basta colocar # antes do código) a função `path!`. Faça o mesmo com  estas duas linhas acima para ver o que acontece. _Spoiler: O desenho da trajetória em nossa simulação desaparecerá._ Vá em frente e teste!
+Perceba que assim como ocorreu com `terra` a cor e a posição da `lua` também são definidos na função anônima `(args...)->object(O, "gray",5), Point(150,30))`. Onde o valor `5` se refere ao raio da lua e `Point(150,30)` significa que a `lua` estará localizada à 150 pixels da origem na direção x e 30 pixels da origem na direção y.\\
+
+O trecho de código `act!(lua, Action(anim_rotate_around(24π, terra)))` diz que `lua` irá girar em um ângulo de  $24π$ em torno da `terra`. Isso fará com que nossa Lua descreva uma espécie de espiral para contornar a Terra. Tente modificar esse valor para ver o que acontece.
+
+A seguir vemos que os objetos `trajetoria_da_terra`e `trajetoria_da_lua`(caminho da `terra` e caminho de`lua`) são definidos nas funções anônimas `(args...)->path!(trajetoria_da_terra, pos(terra), "blue")` e `(args...)->path!(trajetoria_da_lua, pos(lua), "gray")` respectivamente. Isso desenhará a trajetória da `terra` e da `lua`.
+```
+Object(1:500, (args...)->path!(trajetoria_da_terra, pos(terra), "blue"))
+Object(1:500, (args...)->path!(trajetoria_da_lua, pos(lua), "gray"))
+```
+Faça um teste! Apague ou comente a função `path!` e estas duas linhas acima para ver o que acontece. _Spoiler: Não haverá mais o desenho da trajetória em nossa simulação._ Va em frente e teste!
 
 Finalmnte, o comando `render`, renderiza todos os objetos definidos no `video` que definimos como `myvideo` e o produz como um arquivo `gif`.
 ```
@@ -179,9 +183,6 @@ Agora sim, copie e cole o código em um ambiente Julia e o modifique quantas vez
 [^2]: O conceito de função e sua sintaxe são descritos no capítulo 6  do livro `Julia com Física: Uma Introdução`.
 [^3]: O conceito de arrays (vetores e matrizes) é explicado em detalhe no capítulo 4 do livro `Julia com Física: Uma Introdução`.
 [^4]: O conceito de função anônima é explicado no capítulo 6  do livro `Julia com Física: Uma Introdução`. 
-
-* **Autores:** Adeil Araújo, Meirivâni Meneses
-* **Data:** 28.nov.2020
 
 * **O pacote foi desenvolvido por:**
 

@@ -10,7 +10,7 @@
 \toc
 
 ## Atualizações
-* Julia está na [versão 1.5.3](https://julialang.org/). Essa atualização ocorreu no dia 11 de novembro deste ano.
+* 11.nov.2020 - Julia está na [versão 1.5.3](https://julialang.org/).
 
 ## Problemas com o Kernel do Julia no Jupyter Notebook
 
