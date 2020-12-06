@@ -225,7 +225,7 @@ julia> Pluto.run()
 ```
 Pronto! O `Pluto.jl` será aberto no seu navegador e agora lhe resta começar.
 
-* **Exemplo de uso do `Pluto.jl`com o pacote `Plots.jl`[^7]**
+* **Exemplo de uso do `Pluto.jl`com o pacote `Plots.jl`[^6]**
 
 Imagine que você esteja analisando um sistema massa-mola que realiza um movimento harmônico simples (MHS) descrito pelas seguintes funções:
 
@@ -306,14 +306,14 @@ plot!(xlab="tempo (s)")
 plot!(legend=:outertopright)
 ```
 
-Note que aparece um (@.)[^8] na frente das funções. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.
+Note que aparece um (@.)[^7] na frente das funções. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.
 
 Agora, chegou sua vez de testar o `Pluto.jl`. Teste outras funções e pacotes no ambiente. 
 
 
-[^4]: O processo de instalação do Julia é descrito com detalhes no capítluo 1 do livro `Julia com Física: Uma Introdução`.
-[^5]: O uso do pacote `Plots.jl`é descutido em detalhes no capítluo 4 do livro `Julia com Física: Uma Introdução`.
-[^6]: O uso do (@.) é descutido em detalhes no capítluo 7, quando falamos de broadcasting, do livro `Julia com Física: Uma Introdução`.
+[^5]: O processo de instalação do Julia é descrito com detalhes no capítluo 1 do livro `Julia com Física: Uma Introdução`.
+[^6]: O uso do pacote `Plots.jl`é descutido em detalhes no capítluo 4 do livro `Julia com Física: Uma Introdução`.
+[^7]: O uso do (@.) é descutido em detalhes no capítluo 7, quando falamos de broadcasting, do livro `Julia com Física: Uma Introdução`.
 
 * **Referência**
 
