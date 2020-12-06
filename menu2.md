@@ -243,9 +243,10 @@ Para obter os gráficos desse movimento, você precisará digitar o seguinte có
 
 ```
 begin
-  import Pkg
-  Pkg.activate(mktempdir())
+    import Pkg
+    Pkg.activate(mktempdir())
 end
+
 ```
 
 > **Nota 2:** Quando há várias expressões em uma célula, temos duas poções:
@@ -260,9 +261,10 @@ Faça CRTL+C, CRTL+V do código abaixo no `Pluto.jl`.
 
 ```
 begin
-  Pkg.add("Plots")
-  using Plots
+    Pkg.add("Plots")
+    using Plots
 end
+
 ```
 
 ```
@@ -280,16 +282,18 @@ plotly()
 Coloquei o código abaixo para você copiar e colar no`Pluto.jl`.
 
 ```
-t = 0:0.01:2π
-x = @. 0.2 * cos(2t + π)
-v = @. -0.4 * sin(2t + π)
-α = @. -0.8 * cos(2t + π)
+begin
+    t = 0:0.01:2π
+    x = @. 0.2 * cos(2t + π)
+    v = @. -0.4 * sin(2t + π)
+    α = @. -0.8 * cos(2t + π)
+    plot(t, x, label="x(t)",color=:blue,lw=:3,background_color=:lightblue)
+    plot!(t, v, label="v(t)",color=:red,lw=:3)
+    plot!(t, α , label="α(t)",color=:green,lw=:3)
+    plot!(xlab="tempo (s)")
+    plot!(legend=:outertopright)
+end
 
-plot(t, x, label="x(t)",color=:blue,lw=:3,background_color=:lightblue)
-plot!(t, v, label="v(t)",color=:red,lw=:3)
-plot!(t, α , label="α(t)",color=:green,lw=:3)
-plot!(xlab="tempo (s)")
-plot!(legend=:outertopright)
 ```
 
 Observe que nas funções, aparece um (@.)[^7] após o sinal de igual. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.
