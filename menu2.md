@@ -198,10 +198,10 @@ Agora sim, copie e cole o código em um ambiente Julia e o modifique quantas vez
 
 ## _Notebook_ `Pluto.jl`
 
-Uma opção ao _notebook_ Jupyter é o _notebook_ `Pluto.jl`. Ele foi escrito em Julia puro e é super fácil de instalar, além de ser reativo, ou seja, ao alterar uma função ou variável ele atualiza automaticamente todas as células afetadas por essa alteração.
+Uma opção ao _notebook_ Jupyter é o _notebook_ `Pluto.jl`. Ele foi escrito em Julia puro e é super fácil de instalar, além de ser reativo, ou seja, ao alterar uma função ou variável, ele atualiza automaticamente todas as células afetadas por essa alteração.
 
 > **Nota 1:** Para utilizar o `Pluto.jl`você vai precisar:
->1. ter instalado o Julia em seu computador. De preferência a versão v1.5, po ser mais rápida;
+>1. ter instalado o Julia em seu computador. Dê preferência a versão v1.5, por ser mais rápida;
 >2. ter em seu computador o sistema operacional Linux, macOS ou Windows. No _Linux e macOS_ o `Pluto.Jl`funcionará melhor;
 >3. ter instalado o navegador Mozilla **Firefox** ou Google **Chrome**. Certifique-se de obter a versão mais recente.
 
@@ -239,7 +239,7 @@ Imagine que você esteja analisando um sistema massa-mola que realiza um movimen
 \alpha=-0.8 \cdot cos(2 \cdot t+ \pi )
 \end{equation}
 
-Para obter os gráficos desse movimento, você precisa digitar o seguinte código:
+Para obter os gráficos desse movimento, você precisará digitar o seguinte código:
 
 ```
 begin
@@ -251,12 +251,12 @@ end
 > **Nota 2:** Quando há várias expressões em uma célula, temos duas poções:
 >1. Dividir a célula de tal forma que cada célula tenha apenas uma expressão;
 >2. Envolver todo o código em um bloco de _begin_..._end_.
-Essa ação é necessária para configurarmos um ambiente de pacote limpo.
+Essa ação é necessária para configurar um ambiente de pacote limpo.
 
 Em seguida, adicione o pacote Plots ao ambiente, importe e finalmente escolha o _backend plotly_.
 
 
-Novamente, faça CRTL+C, CRTL+V do código abaixo no `Pluto.jl`.
+Faça CRTL+C, CRTL+V do código abaixo no `Pluto.jl`.
 
 ```
 begin
@@ -268,7 +268,7 @@ end
 ```
 plotly()
 ```
- Para obter os gráficos portamento de cada uma dessas funções está descrito na Figura a seguir.
+ Para obter os gráficos de cada uma dessas funções, basta seguir o que está descrito na Figura a seguir.
 
 @@row
 @@left ![](/assets/pluto3.png) @@
@@ -277,7 +277,7 @@ plotly()
 ~~~
 @@
 
-Coloquei o código abaixo que você pudesse finalizar seu teste. Vá em frente copie e cole mais uma vez no `Pluto.jl`.
+Coloquei o código abaixo para você copiar e colar no`Pluto.jl`.
 
 ```
 t = 0:0.01:2π
@@ -292,14 +292,13 @@ plot!(xlab="tempo (s)")
 plot!(legend=:outertopright)
 ```
 
-Note que aparece um (@.)[^7] na frente das funções. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.
+Observe que nas funções, aparece um (@.)[^7] após o sinal de igual. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.
 
-Agora, chegou sua vez de testar o `Pluto.jl`. Teste outras funções e pacotes no ambiente. 
-
+Agora chegou a sua vez de testar o `Pluto.jl`. Escolha outras funções e pacotes.
 
 [^5]: O processo de instalação do Julia é descrito com detalhes no capítluo 1 do livro `Julia com Física: Uma Introdução`.
-[^6]: O uso do pacote `Plots.jl`é descutido em detalhes no capítluo 4 do livro `Julia com Física: Uma Introdução`.
-[^7]: O uso do (@.) é descutido em detalhes no capítluo 7, quando falamos de broadcasting, do livro `Julia com Física: Uma Introdução`.
+[^6]: O uso do pacote `Plots.jl`é discutido em detalhes no capítluo 4 do livro `Julia com Física: Uma Introdução`.
+[^7]: O uso do (@.) é discutido em detalhes no capítluo 7, quando falamos de broadcasting, no livro `Julia com Física: Uma Introdução`.
 
 * **Referência**
 
