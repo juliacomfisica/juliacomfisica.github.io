@@ -207,7 +207,7 @@ Uma opção ao _notebook_ Jupyter é o _notebook_ `Pluto.jl` ele é inscrito em 
 
 * **Instalação**
 
-1. O primeiro passo é instalar o [Julia](https://julialang.org/) em seu computador[^4];
+1. O primeiro passo é instalar o [Julia](https://julialang.org/) em seu computador[^5];
 
 2. Após a instalação, execute o Julia e adicione o pacote digitando:
 
@@ -225,7 +225,7 @@ julia> Pluto.run()
 ```
 Pronto! O `Pluto.jl` será aberto no seu navegador e agora lhe resta começar.
 
-* **Exemplo de uso do `Pluto.jl`com o pacote `Plots.jl`[^5]**
+* **Exemplo de uso do `Pluto.jl`com o pacote `Plots.jl`[^7]**
 
 Imagine que você esteja analisando um sistema massa-mola que realiza um movimento harmônico simples (MHS) descrito pelas seguintes funções:
 
@@ -306,7 +306,7 @@ plot!(xlab="tempo (s)")
 plot!(legend=:outertopright)
 ```
 
-Note que aparece um (@.)[^6] na frente das funções. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.
+Note que aparece um (@.)[^8] na frente das funções. Ele tem a função de inserir, automaticamente, um ponto entre todos os operadores e chamadas da função.
 
 Agora, chegou sua vez de testar o `Pluto.jl`. Teste outras funções e pacotes no ambiente. 
 
