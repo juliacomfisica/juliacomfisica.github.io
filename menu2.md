@@ -11,6 +11,10 @@
 
 \toc
 
+## *Julia com Física: Uma Introdução* 
+
+Adeil Araújo and Meirivâni Oliveira, ["Julia with Physics: An Introduction" in Portuguese](https://www.seduc.ce.gov.br/wp-content/uploads/sites/37/2023/09/Ebook-02-Julia-com-Fisica.pdf), Seduc - CE, September 2023.
+
 ## Animações em Julia com o `Javis.jl`
 
 Seguindo este tutorial passo a passo você obterá, ao final, a seguinte animação:
