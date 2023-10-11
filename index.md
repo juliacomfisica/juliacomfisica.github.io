@@ -1,9 +1,9 @@
 @def title = "Julia com Fisica"
 @def tags = ["syntax", "code"]
 
-# *Site em construção*
+# *Julia com Física: Uma introdução*
 
-_Julia com Física: Uma Introdução_ é um _ebook_ de [Adeil Araújo](https://adeil83.github.io/) e [Meirivâni Meneses](http://lattes.cnpq.br/0390787061745001) ([${1}^{a}$ edição, 2021]()) que apresenta conceitos e princípios básicos de codificação. Nele, ensinamos a resolver
+_Julia com Física: Uma Introdução_ é um _ebook_ de [Adeil Araújo](https://adeil83.github.io/) e [Meirivâni Meneses](http://lattes.cnpq.br/0390787061745001) ([${1}^{a}$ edição, 2023](https://www.seduc.ce.gov.br/wp-content/uploads/sites/37/2023/09/Ebook-02-Julia-com-Fisica.pdf)) que apresenta conceitos e princípios básicos de codificação. Nele, ensinamos a resolver
 problemas simples, a plotar gráficos, inserir unidades de medidas nos resultados, criar funções, importar
 e exportar dados e a trabalhar com controle de fluxo.
 
