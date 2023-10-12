@@ -5,7 +5,7 @@
 
 @def tags = ["syntax", "code"]
 
-# Notas
+# Dicas
 
 \toc
 
