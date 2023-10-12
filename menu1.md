@@ -11,14 +11,16 @@
 
 ## Comunidades Julia
 
-*[Discourse](https://discourse.julialang.org/).//
-*[Zulip](https://julialang.zulipchat.com/).//
-*[Forem](https://forem.julialang.org/adeil83/sharing-the-little-book-julia-with-physics-an-introduction-in-portuguese-10b2).//
+*[Discourse](https://discourse.julialang.org/)
+
+*[Zulip](https://julialang.zulipchat.com/)
+
+*[Forem](https://forem.julialang.org/adeil83/sharing-the-little-book-julia-with-physics-an-introduction-in-portuguese-10b2)
 
 ## Documentação e download
 
-* [Download](https://julialang.org/downloads/).
-* [Documentação](https://docs.julialang.org/en/v1/).
+* [Download](https://julialang.org/downloads/)
+* [Documentação](https://docs.julialang.org/en/v1/)
 
 ## Problemas com o Kernel do Julia no Jupyter Notebook
 
