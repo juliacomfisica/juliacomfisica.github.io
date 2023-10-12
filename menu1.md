@@ -9,7 +9,7 @@
 
 \toc
 
-## Comunidades Julia
+## Comunidades
 
 * [Discourse](https://discourse.julialang.org/)
 
@@ -17,7 +17,7 @@
 
 * [Julia Forem](https://forem.julialang.org/)
 
-## Documentação e download
+## Download e documentação
 
 * [Download](https://julialang.org/downloads/)
 * [Documentação](https://docs.julialang.org/en/v1/)
