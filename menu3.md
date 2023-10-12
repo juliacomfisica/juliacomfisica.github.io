@@ -1,4 +1,4 @@
-@def title = "Bugs & etc... e tal"
+@def title = "Bugs, Etc & tal"
 
 ## Problemas com o Kernel do Julia no Jupyter Notebook
 
