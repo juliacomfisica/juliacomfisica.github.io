@@ -15,7 +15,7 @@
 
 * [Zulip](https://julialang.zulipchat.com/)
 
-* [Forem](https://forem.julialang.org/adeil83/sharing-the-little-book-julia-with-physics-an-introduction-in-portuguese-10b2)
+* [Julia Forem](https://forem.julialang.org/)
 
 ## Documentação e download
 
