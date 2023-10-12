@@ -22,6 +22,10 @@
 * [Download](https://julialang.org/downloads/)
 * [Documentação](https://docs.julialang.org/en/v1/)
 
+## Livros
+
+* [Livros](https://julialang.org/learning/books/)
+
 ## Problemas com o Kernel do Julia no Jupyter Notebook
 
 Para resolver problemas com o kernel do Julia no Jupyter instalado em seu computador, você digitar os comandos abaixo no REPL do Julia.
