@@ -310,7 +310,7 @@ Agora chegou a sua vez de testar o `Pluto.jl`. Escolha outras funções e pacote
 
 * **Referência**
 
-[1] [Pluto.Jl](https://github.com/fonsp/Pluto.jl)
+[1] [Pluto.jl](https://github.com/fonsp/Pluto.jl)
 
 
 ## Tabela Periódica - `PeriodicTable.jl`
