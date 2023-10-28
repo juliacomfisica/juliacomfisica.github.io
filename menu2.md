@@ -176,7 +176,7 @@ Object(1:500, (args...)->path!(trajetoria_da_lua, pos(lua), "gray"))
 ```
 Faça um teste! Apague ou comente a função `path!` e estas duas linhas acima para ver o que acontece. _Spoiler: Não haverá mais o desenho da trajetória em nossa simulação._ Va em frente e teste!
 
-Finalmnte, o comando `render`, renderiza todos os objetos definidos no `video` que definimos como `myvideo` e o produz como um arquivo `gif`.
+Finalmente, o comando `render`, renderiza todos os objetos definidos no `video` que definimos como `myvideo` e o produz como um arquivo `gif`.
 ```
 render(myvideo; pathname="orbitas.gif")
 ```
@@ -198,7 +198,7 @@ Agora sim, copie e cole o código em um ambiente Julia e o modifique quantas vez
 
 * **Referência**
 
-[1] [Javis.Jl](https://docs.juliahub.com/Javis/NRkHq/0.6.3/tutorials/tutorial_1/)
+[1] [Javis.jl](https://docs.juliahub.com/Javis/NRkHq/0.6.3/tutorials/tutorial_1/)
 
 ## _Notebook_ `Pluto.jl`
 
@@ -399,7 +399,7 @@ Para cada elemento é listado: Categoria, massa atômica, densidade, ponto de fu
 * Desenvolvedores do `PeriodicTable.jl`
 
 [Steven G. Johnson](https://github.com/stevengj)\\
-[Jacob Wikmark](https://github.com/lancebeet)\\
+[Jacob Wikmark]()\\
 [Carsten Bauer](https://github.com/carstenbauer)\\
 
 * Referência
