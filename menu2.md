@@ -399,7 +399,7 @@ Para cada elemento é listado: Categoria, massa atômica, densidade, ponto de fu
 * Desenvolvedores do `PeriodicTable.jl`
 
 [Steven G. Johnson](https://github.com/stevengj)\\
-[Jacob Wikmark]()\\
+Jacob Wikmark\\
 [Carsten Bauer](https://github.com/carstenbauer)\\
 
 * Referência
