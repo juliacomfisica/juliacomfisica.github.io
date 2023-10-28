@@ -198,7 +198,7 @@ Agora sim, copie e cole o código em um ambiente Julia e o modifique quantas vez
 
 * **Referência**
 
-[1] [Javis.Jl](https://wikunia.github.io/Javis.jl/stable/)
+[1] [Javis.Jl](https://docs.juliahub.com/Javis/NRkHq/0.6.3/tutorials/tutorial_1/)
 
 ## _Notebook_ `Pluto.jl`
 
@@ -400,7 +400,7 @@ Para cada elemento é listado: Categoria, massa atômica, densidade, ponto de fu
 
 [Steven G. Johnson](https://github.com/stevengj)\\
 [Jacob Wikmark](https://github.com/lancebeet)\\
-[Carsten Bauer](https://github.com/crstnbr)\\
+[Carsten Bauer](https://github.com/carstenbauer)\\
 
 * Referência
 
