@@ -19,3 +19,6 @@ julia > using IJulia; notebook()
 ```
 Após digitar esses códigos, você deve voltar ao Jupyter e o kernel do Julia deverá estar funcionando normalmente.
 
+## Contato
+
+E-mail: juliacomfisica@gmail.com
