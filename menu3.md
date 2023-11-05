@@ -3,9 +3,9 @@
 # Bugs, Etc & tal
 
 \toc
-## Como fazer a referência
+## Citando
 
-Araújo, F.A.G; Oliveira, M.M. Julia com física: uma introdução. 1. ed. Fortaleza: SEDUC-CE,2023. 114 p.
+Araújo, F.A.G; Oliveira, M.M.. Julia com física: uma introdução. 1. ed. Fortaleza: SEDUC-CE,2023. 114 p.
 
 ## Problemas com o Kernel do Julia no Jupyter Notebook
 
