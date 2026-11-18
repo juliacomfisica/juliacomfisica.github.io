@@ -13,7 +13,7 @@
 
 ## O ebook *Julia com Física: uma introdução* foi lançado!
 
-Adeil Araújo e Meirivâni Oliveira, [Julia com Física: uma introdução](https://www.seduc.ce.gov.br/wp-content/uploads/sites/37/2023/09/Ebook-02-Julia-com-Fisica.pdf), Seduc - CE, setembro de 2023.
+Adeil Araújo e Meirivâni Oliveira, [Julia com Física: uma introdução](https://dspace.seduc.ce.gov.br/server/api/core/bitstreams/c73f2fed-787f-43d8-a35b-0d37a5550fe4/content), Seduc - CE, setembro de 2023.
 
 ## Animações em Julia com o `Javis.jl`
 
